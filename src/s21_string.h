@@ -1,7 +1,7 @@
 #ifndef S21_STRING_H
 #define S21_STRING_H
 
-#define s21_size_t unsigned long int
+typedef unsigned long int s21_size_t;
 #define S21_NULL ((void *)0)
 
 
@@ -10,8 +10,9 @@
 
 
 
-void *s21_memchr(const void *str, int c, size_t n);
-//int s21_memcmp(const void *str1, const void *str2, size_t n);
+void *s21_memchr(const void *str, int c, s21_size_t n);
+int s21_memcmp(const void *str1, const void *str2, s21_size_t n);
+void *s21_memcpy(void *dest, const void *src, s21_size_t n);
 
 int main();
 
