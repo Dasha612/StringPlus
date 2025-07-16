@@ -1,69 +1,70 @@
 #include <string.h>
 #include <check.h>
+#include "../src/s21_string.h"
 // char *strchr(const char *s, int c)
 // Сравнение strchr и s21_strchr
-/*
+
 START_TEST(test1_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
+    char *s = "Hello, world!";
+    char *result = strchr(s, 'w');
+    char *s21_result = s21_strchr(s, 'w');
+    ck_assert_ptr_eq(result, s21_result);
 }
 END_TEST
 
-START_TEST(test2_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test2_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test3_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test3_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test4_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test4_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test5_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test5_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test6_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test6_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test7_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
+// START_TEST(test7_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
-START_TEST(test8_s21_strchr) {
-    // s21_code here
-    // code here
-    ck_assert_ptr_eq(result, s21_result)
-}
-END_TEST
-*/
+// START_TEST(test8_s21_strchr) {
+//     // s21_code here
+//     // code here
+//     ck_assert_ptr_eq(result, s21_result)
+// }
+// END_TEST
 
 Suite *s21_strchr_suite(void) {
     Suite *s = suite_create("s21_strchr");
     TCase *tc = tcase_create("s21_strchr_core");
-    // tcase_add_test(tc, test1_s21_strchr);
+    tcase_add_test(tc, test1_s21_strchr);
     // tcase_add_test(tc, test2_s21_strchr);
     // tcase_add_test(tc, test3_s21_strchr);
     // tcase_add_test(tc, test4_s21_strchr);
