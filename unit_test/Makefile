@@ -1,58 +1,66 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 -g
-LDFLAGS = -lcheck -lcheck_pic -lm -pthread -lsubunit
+CFLAGS = -Wall -Wextra -Werror -std=c11 -g -I../src
+LDFLAGS = ../src/s21_string.a -lcheck -lcheck_pic -lm -pthread -lsubunit
 # Нужен будет добавить отчет в html
 all: test_all
+# gcc -Wall -Wextra -Werror -std=c11 -g -Isrc test_s21_memchr.c -Lsrc -lstring -lcheck -lcheck_pic -lm -pthread -lsubunit -o test_memchr
+test_all: memchr.o memcmp.o memcpy.o memset.o strchr.o strcspn.o strerror.o strlen.o strncat.o strncmp.o strncpy.o strpbrk.o strrchr.o strstr.o strtok.o
+	$(CC) $(CFLAGS) memchr.o memcmp.o memcpy.o memset.o strchr.o strcspn.o strerror.o strlen.o strncat.o strncmp.o strncpy.o strpbrk.o strrchr.o strstr.o strtok.o $(LDFLAGS) -o test_all
+	echo "test_all compiled"
+	./test_all
+	echo "test_all executed"
+	rm -f *.o
+	rm -f test_all
 
-test_all: test_memchr test_memcmp test_memcpy test_memset test_strchr test_strcspn test_strerror test_strlen test_strncat test_strncmp test_strncpy test_strpbrk test_strrchr test_strstr test_strtok
+memchr.o: test_s21_memchr.c
+	$(CC) $(CFLAGS) test_s21_memchr.c -o memchr.o $(LDFLAGS)
 
-test_memchr: test_s21_memchr.c
-	$(CC) $(CFLAGS) -o test_memchr test_s21_memchr.c $(LDFLAGS)
+memcmp.o: test_s21_memcmp.c
+	$(CC) $(CFLAGS) test_s21_memcmp.c -o memcmp.o $(LDFLAGS)
 
-test_memcmp: test_s21_memcmp.c
-	$(CC) $(CFLAGS) -o test_memcmp test_s21_memcmp.c $(LDFLAGS)
+memcpy.o: test_s21_memcpy.c
+	$(CC) $(CFLAGS) test_s21_memcpy.c -o memcpy.o  $(LDFLAGS)
 
-test_memcpy: test_s21_memcpy.c
-	$(CC) $(CFLAGS) -o test_memcpy test_s21_memcpy.c $(LDFLAGS)
+memset.o: test_s21_memset.c
+	$(CC) $(CFLAGS) test_s21_memset.c -o memset.o $(LDFLAGS)
 
-test_memset: test_s21_memset.c
-	$(CC) $(CFLAGS) -o test_memset test_s21_memset.c $(LDFLAGS)
+strchr.o: test_s21_strchr.c
+	$(CC) $(CFLAGS) test_s21_strchr.c -o strchr.o $(LDFLAGS)
 
-test_strchr: test_s21_strchr.c
-	$(CC) $(CFLAGS) -o test_strchr test_s21_strchr.c $(LDFLAGS)
+strcspn.o: test_s21_strcspn.c
+	$(CC) $(CFLAGS) test_s21_strcspn.c -o strcspn.o $(LDFLAGS)
 
-test_strcspn: test_s21_strcspn.c
-	$(CC) $(CFLAGS) -o test_strcspn test_s21_strcspn.c $(LDFLAGS)
+strerror.o: test_s21_strerror.c
+	$(CC) $(CFLAGS) test_s21_strerror.c -o strerror.o $(LDFLAGS)
 
-test_strerror: test_s21_strerror.c
-	$(CC) $(CFLAGS) -o test_strerror test_s21_strerror.c $(LDFLAGS)
+strlen.o: test_s21_strlen.c
+	$(CC) $(CFLAGS) test_s21_strlen.c -o strlen.o $(LDFLAGS)
 
-test_strlen: test_s21_strlen.c
-	$(CC) $(CFLAGS) -o test_strlen test_s21_strlen.c $(LDFLAGS)
+strncat.o: test_s21_strncat.c
+	$(CC) $(CFLAGS) test_s21_strncat.c -o strncat.o $(LDFLAGS)
 
-test_strncat: test_s21_strncat.c
-	$(CC) $(CFLAGS) -o test_strncat test_s21_strncat.c $(LDFLAGS)
+strncmp.o: test_s21_strncmp.c
+	$(CC) $(CFLAGS) test_s21_strncmp.c -o strncmp.o $(LDFLAGS)
 
-test_strncmp: test_s21_strncmp.c
-	$(CC) $(CFLAGS) -o test_strncmp test_s21_strncmp.c $(LDFLAGS)
+strncpy.o: test_s21_strncpy.c
+	$(CC) $(CFLAGS) test_s21_strncpy.c -o strncpy.o $(LDFLAGS)
 
-test_strncpy: test_s21_strncpy.c
-	$(CC) $(CFLAGS) -o test_strncpy test_s21_strncpy.c $(LDFLAGS)
+strpbrk.o: test_s21_strpbrk.c
+	$(CC) $(CFLAGS) test_s21_strpbrk.c -o strpbrk.o $(LDFLAGS)
 
-test_strpbrk: test_s21_strpbrk.c
-	$(CC) $(CFLAGS) -o test_strpbrk test_s21_strpbrk.c $(LDFLAGS)
+strrchr.o: test_s21_strrchr.c
+	$(CC) $(CFLAGS) test_s21_strrchr.c -o strrchr.o $(LDFLAGS)
 
-test_strrchr: test_s21_strrchr.c
-	$(CC) $(CFLAGS) -o test_strrchr test_s21_strrchr.c $(LDFLAGS)
+strstr.o: test_s21_strstr.c
+	$(CC) $(CFLAGS) test_s21_strstr.c -o strstr.o $(LDFLAGS)
 
-test_strstr: test_s21_strstr.c
-	$(CC) $(CFLAGS) -o test_strstr test_s21_strstr.c $(LDFLAGS)
+strtok.o: test_s21_strtok.c
+	$(CC) $(CFLAGS) test_s21_strtok.c -o strtok.o $(LDFLAGS)
 
-test_strtok: test_s21_strtok.c
-	$(CC) $(CFLAGS) -o test_strtok test_s21_strtok.c $(LDFLAGS)\
-
-test_delete_me: delete_me.c
-	$(CC) $(CFLAGS) -o delete_me delete_me.c $(LDFLAGS)
+rebuild: clean all
 
 clean:
-	rm -f delete_m
+	rm -f *.o
+	rm -f test_all
+
+PHONY: rebuild clean all
