@@ -1,5 +1,6 @@
 #include <string.h>
 #include <check.h>
+#include "../src/s21_string.h"
 // void *memcpy(void *dest, const void *src, size_t n)
 // Сравнение memcpy и s21_memcpy
 
