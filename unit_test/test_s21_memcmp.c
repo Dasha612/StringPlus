@@ -1,5 +1,6 @@
 #include <string.h>
 #include <check.h>
+#include "../src/s21_string.h"
 // int memcmp(const void *s1, const void *s2, size_t n) {
 // Сравнение memcmp и s21_memcmp
 
