@@ -2,7 +2,7 @@
 
 
 char *s21_strpbrk(const char *str1, const char *str2){
-    char * found = S21_NULL;
+    const char *found = S21_NULL;
     while (*str1 != '\0'){
         const char * ptr = str2;
         while (*ptr != '\0'){
@@ -15,5 +15,5 @@ char *s21_strpbrk(const char *str1, const char *str2){
         if (found != S21_NULL) break;
         str1++;
     }
-    return found;
+    return (char*)found;
 }

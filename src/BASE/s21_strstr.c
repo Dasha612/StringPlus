@@ -2,7 +2,7 @@
 
 
 char *s21_strstr(const char *haystack, const char *needle) {
-    char *found = S21_NULL;
+    const char *found = S21_NULL;
     if (*needle != '\0'){
         while (*haystack != '\0'){
             const char *h = haystack;
@@ -22,6 +22,6 @@ char *s21_strstr(const char *haystack, const char *needle) {
 
     }
     
-    return found;
+    return (char *)found;
     
 }

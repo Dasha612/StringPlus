@@ -1,11 +1,23 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -Werror
 LIB_NAME = s21_string.a
-
 SRC = s21_string.c \
       BASE/s21_memchr.c \
       BASE/s21_memcmp.c \
-      BASE/s21_memcpy.c
+      BASE/s21_memcpy.c \
+	  BASE/s21_memset.c \
+	  BASE/s21_strchr.c \
+	  BASE/s21_strcspn.c \
+	  BASE/s21_strerror.c \
+	  BASE/s21_strlen.c \
+	  BASE/s21_strncat.c \
+	  BASE/s21_strncmp.c \
+	  BASE/s21_strncpy.c \
+	  BASE/s21_strpbrk.c \
+	  BASE/s21_strrchr.c \
+  	  BASE/s21_strstr.c \
+	  BASE/s21_strtok.c \
+
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,6 +49,6 @@ clang:
 	clang-format -i $(SRC) $(TEST_SRC)
 
 clean:
-	rm -rf *.o *.a *.gc* *.info $(TEST_EXEC)
+	rm -rf *.o *.a *.gc* *.info $(TEST_EXEC) BASE/*.o
 
 .PHONY: all clean test cppcheck clang
