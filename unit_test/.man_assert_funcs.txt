@@ -1,0 +1,6 @@
+int             ck_assert_int_eq()
+size_t          ck_assert_int_eq()
+char*           ck_assert_str_eq()/ck_assert_ptr_eq()
+void*           ck_assert_ptr_eq()
+double          ck_assert_double_eq_tol()
+memcmp(...)     ck_assert_mem_eq()

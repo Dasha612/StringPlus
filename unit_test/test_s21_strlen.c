@@ -49,7 +49,6 @@ START_TEST(test6_s21_strlen_long_string) {
     long_str[1000] = '\0';
     size_t s21_result = s21_strlen(long_str);
     size_t result = strlen(long_str);
-
     ck_assert_int_eq(s21_result, result);
 }
 END_TEST
@@ -68,7 +67,7 @@ START_TEST(test8_s21_strlen_null_pointer) {
     ck_assert_int_eq(s21_result, result);
 }
 END_TEST
-Suite *s21_strlen_suite(void) {
+*s21_strlen_suite(void) {
     Suite *s = suite_create("s21_strlen");
     TCase *tc = tcase_create("s21_strlen_core");
     tcase_add_test(tc, test1_s21_strlen_empty);

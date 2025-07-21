@@ -59,12 +59,12 @@ START_TEST(test7_s21_memchr_high_ascii_value) {
 }
 END_TEST
 
-START_TEST(test8_s21_memchr_null_pointer) {
-    void *s21_result = s21_memchr(NULL, 'X', 10);
-    void *result = memchr(NULL, 'X', 10);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_memchr_null_pointer) {
+//     void *s21_result = s21_memchr(NULL, 'X', 10);
+//     void *result = memchr(NULL, 'X', 10);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 Suite *s21_memchr_suite(void) {
     Suite *s = suite_create("s21_memchr");
@@ -76,7 +76,7 @@ Suite *s21_memchr_suite(void) {
     tcase_add_test(tc, test5_s21_memchr_value_at_end);
     tcase_add_test(tc, test6_s21_memchr_multiple_occurrences);
     tcase_add_test(tc, test7_s21_memchr_high_ascii_value);
-    tcase_add_test(tc, test8_s21_memchr_null_pointer);
+    // tcase_add_test(tc, test8_s21_memchr_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }

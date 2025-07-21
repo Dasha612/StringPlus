@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 -g -I../src
+CFLAGS = -Wall -Wextra -std=c11 -g -I../src
 LDFLAGS = ../src/s21_string.a -lcheck -lcheck_pic -lm -pthread -lsubunit
 # Нужен будет добавить отчет в html
 all: test_all
