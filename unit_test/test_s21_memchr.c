@@ -4,67 +4,104 @@
 // char *memchr(const char *s, int c, size_t n) {
 // Сравнение memchr и s21_memchr
 START_TEST(test1_s21_memchr_zero_size) {
+    size_t n = 0;
+    s21_size_t s21_n = 0;
     const char buffer[10] = "abcdefghij";
-    void *s21_result = s21_memchr(buffer, 'a', 0);
-    void *result = memchr(buffer, 'a', 0);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'a', n);
+    void *s21_res = s21_memchr(buffer, 'a', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test2_s21_memchr_not_found) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
     const char buffer[10] = "abcdefghij";
-    void *s21_result = s21_memchr(buffer, 'z', 10);
-    void *result = memchr(buffer, 'z', 10);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'z', n);
+    void *s21_res = s21_memchr(buffer, 'z', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test3_s21_memchr_value_at_beginning) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
     const char buffer[10] = "abcdefghij";
-    void *s21_result = s21_memchr(buffer, 'a', 10);
-    void *result = memchr(buffer, 'a', 10);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'a', n);
+    void *s21_res = s21_memchr(buffer, 'a', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test4_s21_memchr_value_in_middle) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
     const char buffer[10] = "abcdefghij";
-    void *s21_result = s21_memchr(buffer, 'd', 10);
-    void *result = memchr(buffer, 'd', 10);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'd', n);
+    void *s21_res = s21_memchr(buffer, 'd', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test5_s21_memchr_value_at_end) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
     const char buffer[10] = "abcdefghij";
-    void *s21_result = s21_memchr(buffer, 'j', 10);
-    void *result = memchr(buffer, 'j', 10);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'j', n);
+    void *s21_res = s21_memchr(buffer, 'j', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test6_s21_memchr_multiple_occurrences) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
     const char buffer[10] = "abcdeffghi";
-    void *s21_result = s21_memchr(buffer, 'f', 10);
-    void *result = memchr(buffer, 'f', 10);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, 'f', n);
+    void *s21_res = s21_memchr(buffer, 'f', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test7_s21_memchr_high_ascii_value) {
+    size_t n = 4;
+    s21_size_t s21_n = 4;
     unsigned char buffer[10] = {0x00, 0x01, 0xFF, 0x02};
-    void *s21_result = s21_memchr(buffer, -1, 4); // -1 → 0xFF
-    void *result = memchr(buffer, -1, 4);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memchr(buffer, -1, n);
+    void *s21_res = s21_memchr(buffer, -1, s21_n); // -1 → 0xFF
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
-// START_TEST(test8_s21_memchr_null_pointer) {
-//     void *s21_result = s21_memchr(NULL, 'X', 10);
-//     void *result = memchr(NULL, 'X', 10);
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test8_s21_memchr_search_for_null) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
+    const char buffer[10] = {'a', 'b', 'c', '\0', 'd', 'e', 'f', 'g', 'h', 'i'};
+    void *res = memchr(buffer, '\0', n);
+    void *s21_res = s21_memchr(buffer, '\0', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test9_s21_memchr_partial_search) {
+    size_t n = 5;
+    s21_size_t s21_n = 5;
+    const char buffer[10] = "aaaaabbbbb";
+    void *res = memchr(buffer, 'b', n);
+    void *s21_res = s21_memchr(buffer, 'b', s21_n); // ищем только в первой половине
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test10_s21_memchr_all_same) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
+    const char buffer[10] = "cccccccccc";
+    void *res = memchr(buffer, 'c', n);
+    void *s21_res = s21_memchr(buffer, 'c', s21_n);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
 Suite *s21_memchr_suite(void) {
     Suite *s = suite_create("s21_memchr");
@@ -76,7 +113,9 @@ Suite *s21_memchr_suite(void) {
     tcase_add_test(tc, test5_s21_memchr_value_at_end);
     tcase_add_test(tc, test6_s21_memchr_multiple_occurrences);
     tcase_add_test(tc, test7_s21_memchr_high_ascii_value);
-    // tcase_add_test(tc, test8_s21_memchr_null_pointer);
+    tcase_add_test(tc, test8_s21_memchr_search_for_null);
+    tcase_add_test(tc, test9_s21_memchr_partial_search);
+    tcase_add_test(tc, test10_s21_memchr_all_same);
     suite_add_tcase(s, tc);
     return s;
 }

@@ -4,52 +4,52 @@
 // char *strtok(char *str, const char *delim)
 // Сравнение strtok и s21_strtok
 START_TEST(test1_s21_strtok_simple_tokenization) {
-    char str[] = "apple,banana,orange";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, delim);
-        result = strtok(NULL, delim);
+    char a[] = "apple,banana,orange";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    while (s21_res != S21_NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(S21_NULL, b);
     }
-    ck_assert_ptr_eq(s21_result, result);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test2_s21_strtok_multiple_delimiters) {
-    char str[] = "a;b,c;d";
-    const char delim[] = ",;:";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, delim);
-        result = strtok(NULL, delim);
+    char a[] = "a;b,c;d";
+    const char b[] = ",;:";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    while (s21_res != S21_NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(S21_NULL, b);
     }
-    ck_assert_ptr_eq(s21_result, result);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test3_s21_strtok_empty_string) {
-    char str[] = "";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[] = "";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test4_s21_strtok_delimiter_at_beginning) {
-    char str[] = ",abc,def";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
+    char a[] = ",abc,def";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
     int i = 0;
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, delim);
-        result = strtok(NULL, delim);
+    while (s21_res != S21_NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(S21_NULL, b);
         i++;
     }
     ck_assert_int_eq(i, 2); // должно быть 2 токена: "abc", "def"
@@ -57,15 +57,15 @@ START_TEST(test4_s21_strtok_delimiter_at_beginning) {
 END_TEST
 
 START_TEST(test5_s21_strtok_delimiter_at_end) {
-    char str[] = "abc,def,";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
+    char a[] = "abc,def,";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
     int i = 0;
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, delim);
-        result = strtok(NULL, delim);
+    while (s21_res != S21_NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(S21_NULL, b);
         i++;
     }
     ck_assert_int_eq(i, 2); // должно быть 2 токена: "abc", "def"
@@ -73,39 +73,66 @@ START_TEST(test5_s21_strtok_delimiter_at_end) {
 END_TEST
 
 START_TEST(test6_s21_strtok_consecutive_delimiters) {
-    char str[] = "a,,b,,c";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
+    char a[] = "a,,b,,c";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
     int i = 0;
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, delim);
-        result = strtok(NULL, delim);
+    while (s21_res != NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(NULL, b);
         i++;
     }
     ck_assert_int_eq(i, 3); // должно быть 3 токена: "a", "b", "c"
 }
 END_TEST
 
-// START_TEST(test7_s21_strtok_null_delimiter_input) {
-//     char str[] = "apple,banana,orange";
-//     const char delim[] = ",";
-//     char *s21_result = s21_strtok(str, delim);
-//     char *result = strtok(str, delim);
-//     while (s21_result != NULL && result != NULL) {
-//         ck_assert_ptr_eq(s21_result, result);
-//         s21_result = s21_strtok(NULL, NULL); // второй аргумент NULL
-//         result = strtok(NULL, NULL);
-//     }
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test7_s21_strtok_only_delimiters) {
+    char a[] = ",,,";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
 START_TEST(test8_s21_strtok_null_pointer_input) {
-    char *s21_result = s21_strtok(NULL, ",");
-    char *result = strtok(NULL, ",");
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strtok(NULL, ",");
+    char *s21_res = s21_strtok(NULL, ",");
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test9_s21_strtok_all_delimiters) {
+    char a[] = ",,,";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test10_s21_strtok_no_delimiters) {
+    char a[] = "abcdef";
+    const char b[] = ",";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    ck_assert_str_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test11_s21_strtok_delim_is_space) {
+    char a[] = "a b c";
+    const char b[] = " ";
+    char *res = strtok(a, b);
+    char *s21_res = s21_strtok(a, b);
+    while (s21_res != S21_NULL && res != NULL) {
+        ck_assert_ptr_eq(s21_res, res);
+        res = strtok(NULL, b);
+        s21_res = s21_strtok(S21_NULL, b);
+    }
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
@@ -118,8 +145,11 @@ Suite *s21_strtok_suite(void) {
     tcase_add_test(tc, test4_s21_strtok_delimiter_at_beginning);
     tcase_add_test(tc, test5_s21_strtok_delimiter_at_end);
     tcase_add_test(tc, test6_s21_strtok_consecutive_delimiters);
-    // tcase_add_test(tc, test7_s21_strtok_null_delimiter_input);
+    tcase_add_test(tc, test7_s21_strtok_only_delimiters);
     tcase_add_test(tc, test8_s21_strtok_null_pointer_input);
+    tcase_add_test(tc, test9_s21_strtok_all_delimiters);
+    tcase_add_test(tc, test10_s21_strtok_no_delimiters);
+    tcase_add_test(tc, test11_s21_strtok_delim_is_space);
     suite_add_tcase(s, tc);
     return s;
 }

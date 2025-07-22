@@ -9,6 +9,8 @@ all: test_all
 
 test_all: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o test_all
+	rm -f *.o
+	./test_all
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -16,4 +18,6 @@ test_all: $(OBJS)
 clean:
 	rm -f *.o test_all
 
-.PHONY: all clean
+rebuild: clean all
+
+.PHONY: all clean rebuild

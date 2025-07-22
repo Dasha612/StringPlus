@@ -6,66 +6,75 @@
 
 START_TEST(test1_s21_strchr_not_found) {
     const char str[] = "hello";
-    char *s21_result = s21_strchr(str, 'x');
-    char *result = strchr(str, 'x');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, 'x');
+    char *s21_res = s21_strchr(str, 'x');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test2_s21_strchr_at_beginning) {
     const char str[] = "apple";
-    char *s21_result = s21_strchr(str, 'a');
-    char *result = strchr(str, 'a');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, 'a');
+    char *s21_res = s21_strchr(str, 'a');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test3_s21_strchr_in_middle) {
     const char str[] = "banana";
-    char *s21_result = s21_strchr(str, 'n');
-    char *result = strchr(str, 'n');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, 'n');
+    char *s21_res = s21_strchr(str, 'n');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test4_s21_strchr_at_end) {
     const char str[] = "orange";
-    char *s21_result = s21_strchr(str, 'e');
-    char *result = strchr(str, 'e');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, 'e');
+    char *s21_res = s21_strchr(str, 'e');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test5_s21_strchr_search_for_null) {
     const char str[] = "test\0end";
-    char *s21_result = s21_strchr(str, '\0');
-    char *result = strchr(str, '\0');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, '\0');
+    char *s21_res = s21_strchr(str, '\0');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test6_s21_strchr_multiple_occurrences) {
     const char str[] = "abcdeffghi";
-    char *s21_result = s21_strchr(str, 'f');
-    char *result = strchr(str, 'f');
-    ck_assert_ptr_eq(s21_result, result);
+    char *res = strchr(str, 'f');
+    char *s21_res = s21_strchr(str, 'f');
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
-// START_TEST(test7_s21_strchr_high_ascii_value) {
-//     const char str[] = "abc\xffdef";
-//     char *s21_result = s21_strchr(str, -1); // -1 → 0xFF
-//     char *result = strchr(str, -1);
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test7_s21_strchr_empty_string) {
+    const char str[] = "";
+    char *res = strchr(str, 'a');
+    char *s21_res = s21_strchr(str, 'a');
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
-// START_TEST(test8_s21_strchr_null_pointer) {
-//     char *s21_result = s21_strchr(NULL, 'x');
-//     char *result = strchr(NULL, 'x');
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test8_s21_strchr_all_same) {
+    const char str[] = "aaaaaa";
+    char *res = strchr(str, 'a');
+    char *s21_res = s21_strchr(str, 'a');
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test9_s21_strchr_search_for_space) {
+    const char str[] = "abc def";
+    char *res = strchr(str, ' ');
+    char *s21_res = s21_strchr(str, ' ');
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
 Suite *s21_strchr_suite(void) {
     Suite *s = suite_create("s21_strchr");
@@ -76,8 +85,9 @@ Suite *s21_strchr_suite(void) {
     tcase_add_test(tc, test4_s21_strchr_at_end);
     tcase_add_test(tc, test5_s21_strchr_search_for_null);
     tcase_add_test(tc, test6_s21_strchr_multiple_occurrences);
-    // tcase_add_test(tc, test7_s21_strchr_high_ascii_value);
-    // tcase_add_test(tc, test8_s21_strchr_null_pointer);
+    tcase_add_test(tc, test7_s21_strchr_empty_string);
+    tcase_add_test(tc, test8_s21_strchr_all_same);
+    tcase_add_test(tc, test9_s21_strchr_search_for_space);
     suite_add_tcase(s, tc);
     return s;
 }

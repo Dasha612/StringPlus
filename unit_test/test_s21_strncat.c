@@ -4,104 +4,156 @@
 // char* strncat(char *dest, const char *src, size_t n)
 // Сравнение strncat и s21_strncat
 START_TEST(test1_s21_strncat_simple_case) {
-    char s21_dest[10] = "abc";
-    char dest[10] = "abc";
-    const char s21_src[] = "def";
-    const char src[] = "def";
-    char *s21_result = s21_strncat(s21_dest, s21_src, 3);
-    char *result = strncat(dest, src, 3);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
+    size_t n = 3;
+    s21_size_t s21_n = 3;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "def";
+    const char s21_b[] = "def";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
 START_TEST(test2_s21_strncat_full_copy) {
-    char s21_dest[10] = "abc";
-    char dest[10] = "abc";
-    const char s21_src[] = "123456789";
-    const char src[] = "123456789";
-    char *s21_result = s21_strncat(s21_dest, s21_src, 6);
-    char *result = strncat(dest, src, 6);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
+    size_t n = 6;
+    s21_size_t s21_n = 6;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "123456789";
+    const char s21_b[] = "123456789";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
-START_TEST(test3_s21_strncat_null_dest) {
-    void *s21_dest = NULL;
-    void *dest = NULL;
-    const char s21_src[] = "test";
-    const char src[] = "test";
-    char *s21_result = s21_strncat(s21_dest, s21_src, 4);
-    char *result = strncat(dest, src, 4);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
+START_TEST(test3_s21_strncat_n_zero) {
+    size_t n = 0;
+    s21_size_t s21_n = 0;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "def";
+    const char s21_b[] = "def";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
-// START_TEST(test4_s21_strncat_null_src) {
-//     char s21_dest[10] = "abc";
-//     char dest[10] = "abc";
-//     char *s21_result = s21_strncat(s21_dest, NULL, 4);
-//     char *result = strncat(dest, NULL, 4);
-//     ck_assert_ptr_eq(s21_result, result);
-//     ck_assert_str_eq(s21_dest, dest);
-// }
-// END_TEST
+START_TEST(test4_s21_strncat_n_bigger_than_src) {
+    size_t n = 10;
+    s21_size_t s21_n = 10;
+    char a[15] = "abc";
+    char s21_a[15] = "abc";
+    const char b[] = "def";
+    const char s21_b[] = "def";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
+}
+END_TEST
 
 START_TEST(test5_s21_strncat_embedded_null_in_src) {
-    char s21_dest[10] = "abc";
-    char dest[10] = "abc";
-    const char s21_src[] = "12\0345";
-    const char src[] = "12\0345";
-    char *s21_result = s21_strncat(s21_dest, s21_src, 5);
-    char *result = strncat(dest, src, 5);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
+    size_t n = 5;
+    s21_size_t s21_n = 5;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "12\0345";
+    const char s21_b[] = "12\0345";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
 START_TEST(test6_s21_strncat_overlap) {
-    char s21_buffer[10] = "abcdefghij";
-    char buffer[10] = "abcdefghij";
-    char *s21_result = s21_strncat(s21_buffer + 5, s21_buffer, 5);
-    char *result = strncat(buffer + 5, buffer, 5);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_buffer, buffer);
+    size_t n = 5;
+    s21_size_t s21_n = 5;
+    char a[10] = "123456789";
+    char s21_a[10] = "123456789";
+    char *res = strncat(a + 5, a, n);
+    char *s21_res = s21_strncat(s21_a + 5, s21_a, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
 START_TEST(test7_s21_strncat_zero_length) {
-    char s21_dest[10] = "abc";
-    char dest[10] = "abc";
-    char *s21_result = s21_strncat(s21_dest, "123", 0);
-    char *result = strncat(dest, "123", 0);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
+    size_t n = 0;
+    s21_size_t s21_n = 0;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "123";
+    const char s21_b[] = "123";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
 }
 END_TEST
 
-// START_TEST(test8_s21_strncat_buffer_overflow) {
-//     char s21_dest[3] = "ab";
-//     char dest[3] = "ab";
-//     char *s21_result = s21_strncat(s21_dest, "123456", 6);
-//     char *result = strncat(dest, "123456", 6);
-//     ck_assert_ptr_eq(s21_result, result);
-//     ck_assert_str_eq(s21_dest, dest);
-// }
-// END_TEST
+START_TEST(test8_s21_strncat_empty_src) {
+    size_t n = 2;
+    s21_size_t s21_n = 2;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "";
+    const char s21_b[] = "";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
+}
+END_TEST
+
+START_TEST(test9_s21_strncat_empty_dest) {
+    size_t n = 3;
+    s21_size_t s21_n = 3;
+    char s21_a[10] = "";
+    char a[10] = "";
+    const char s21_b[] = "abc";
+    const char b[] = "abc";
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    char *res = strncat(a, b, n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
+}
+END_TEST
+
+START_TEST(test10_s21_strncat_partial_copy) {
+    size_t n = 2;
+    s21_size_t s21_n = 2;
+    char a[10] = "abc";
+    char s21_a[10] = "abc";
+    const char b[] = "defgh";
+    const char s21_b[] = "defgh";
+    char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
+    ck_assert_str_eq(s21_a, a);
+}
+END_TEST
 
 Suite *s21_strncat_suite(void) {
     Suite *s = suite_create("s21_strncat");
     TCase *tc = tcase_create("s21_strncat_core");
     tcase_add_test(tc, test1_s21_strncat_simple_case);
     tcase_add_test(tc, test2_s21_strncat_full_copy);
-    tcase_add_test(tc, test3_s21_strncat_null_dest);
-    // tcase_add_test(tc, test4_s21_strncat_null_src);
+    tcase_add_test(tc, test3_s21_strncat_n_zero);
+    tcase_add_test(tc, test4_s21_strncat_n_bigger_than_src);
     tcase_add_test(tc, test5_s21_strncat_embedded_null_in_src);
     tcase_add_test(tc, test6_s21_strncat_overlap);
     tcase_add_test(tc, test7_s21_strncat_zero_length);
-    // tcase_add_test(tc, test8_s21_strncat_buffer_overflow);
+    tcase_add_test(tc, test8_s21_strncat_empty_src);
+    tcase_add_test(tc, test9_s21_strncat_empty_dest);
+    tcase_add_test(tc, test10_s21_strncat_partial_copy);
     suite_add_tcase(s, tc);
     return s;
 }

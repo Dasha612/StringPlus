@@ -4,74 +4,85 @@
 // char *strpbrk(const char *s, const char *accept)
 // Сравнение strpbrk и s21_strpbrk
 START_TEST(test1_s21_strpbrk_match_at_beginning) {
-    const char str1[] = "apple";
-    const char str2[] = "a";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
+    const char a[] = "apple";
+    const char b[] = "a";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test2_s21_strpbrk_match_in_middle) {
-    const char str1[] = "banana";
-    const char str2[] = "n";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
+    const char a[] = "banana";
+    const char b[] = "n";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test3_s21_strpbrk_match_at_end) {
-    const char str1[] = "orange";
-    const char str2[] = "e";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
+    const char a[] = "orange";
+    const char b[] = "e";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
-// START_TEST(test4_s21_strpbrk_no_match) {
-//     const char str1[] = "abcdef";
-//     const char str2[] = "xyz";
-//     char *s21_result = s21_strpbrk(str1, str2);
-//     char *result = strpbrk(str1, str2);
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test4_s21_strpbrk_space_match) {
+    const char a[] = "abc def";
+    const char b[] = " xyz";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
 START_TEST(test5_s21_strpbrk_multiple_matches) {
-    const char str1[] = "abcdeffghi";
-    const char str2[] = "fed";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[] = "abcdeffghi";
+    const char b[] = "fed";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
-// START_TEST(test6_s21_strpbrk_empty_str2) {
-//     const char str1[] = "abcdef";
-//     const char str2[] = "";
-//     char *s21_result = s21_strpbrk(str1, str2);
-//     char *result = strpbrk(str1, str2);
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test6_s21_strpbrk_no_match) {
+    char a[] = "abcdef";
+    const char b[] = "xyz";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
-// START_TEST(test7_s21_strpbrk_high_ascii_value) {
-//     const char str1[] = "abc\xffdef";
-//     const char str2[] = "\xff";
-//     char *s21_result = s21_strpbrk(str1, str2);
-//     char *result = strpbrk(str1, str2);
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test7_s21_strpbrk_empty_str1) {
+    char a[] = "";
+    const char b[] = "abc";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
-// START_TEST(test8_s21_strpbrk_null_pointer) {
-//     char *s21_result = s21_strpbrk(NULL, "abc");
-//     char *result = strpbrk(NULL, "abc");
-//     ck_assert_ptr_eq(s21_result, result);
-// }
-// END_TEST
+START_TEST(test8_s21_strpbrk_empty_str2) {
+    char a[] = "abcdef";
+    const char b[] = "";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
+
+START_TEST(test9_s21_strpbrk_all_match) {
+    const char a[] = "abc";
+    const char b[] = "abc";
+    char *res = strpbrk(a, b);
+    char *s21_res = s21_strpbrk(a, b);
+    ck_assert_ptr_eq(s21_res, res);
+}
+END_TEST
 
 Suite *s21_strpbrk_suite(void) {
     Suite *s = suite_create("s21_strpbrk");
@@ -79,11 +90,12 @@ Suite *s21_strpbrk_suite(void) {
     tcase_add_test(tc, test1_s21_strpbrk_match_at_beginning);
     tcase_add_test(tc, test2_s21_strpbrk_match_in_middle);
     tcase_add_test(tc, test3_s21_strpbrk_match_at_end);
-    // tcase_add_test(tc, test4_s21_strpbrk_no_match);
+    tcase_add_test(tc, test4_s21_strpbrk_space_match);
     tcase_add_test(tc, test5_s21_strpbrk_multiple_matches);
-    // tcase_add_test(tc, test6_s21_strpbrk_empty_str2);
-    // tcase_add_test(tc, test7_s21_strpbrk_high_ascii_value);
-    // tcase_add_test(tc, test8_s21_strpbrk_null_pointer);
+    tcase_add_test(tc, test6_s21_strpbrk_no_match);
+    tcase_add_test(tc, test7_s21_strpbrk_empty_str1);
+    tcase_add_test(tc, test8_s21_strpbrk_empty_str2);
+    tcase_add_test(tc, test9_s21_strpbrk_all_match);
     suite_add_tcase(s, tc);
     return s;
 }
