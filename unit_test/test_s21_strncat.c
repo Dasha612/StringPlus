@@ -78,8 +78,10 @@ START_TEST(test6_s21_strncat_overlap) {
     s21_size_t s21_n = 5;
     char a[10] = "123456789";
     char s21_a[10] = "123456789";
-    char *res = strncat(a + 5, a, n);
-    char *s21_res = s21_strncat(s21_a + 5, s21_a, s21_n);
+    char res[10] = "";
+    char s21_res[10] = "";
+    strncat(res, a + 5, n);
+    s21_strncat(s21_res, s21_a + 5, s21_n);
     ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
