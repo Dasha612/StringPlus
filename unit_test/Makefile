@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -g -I../src
+CFLAGS = -Wall -Wextra -std=c11 -I../src
 LDFLAGS = ../src/s21_string.a -lcheck -lcheck_pic -lm -pthread -lsubunit
 # Нужен будет добавить отчет в html
 all: test_all
@@ -13,49 +13,49 @@ test_all: memchr.o memcmp.o memcpy.o memset.o strchr.o strcspn.o strerror.o strl
 	rm -f test_all
 
 memchr.o: test_s21_memchr.c
-	$(CC) $(CFLAGS) test_s21_memchr.c -o memchr.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_memchr.c -o memchr.o
 
 memcmp.o: test_s21_memcmp.c
-	$(CC) $(CFLAGS) test_s21_memcmp.c -o memcmp.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_memcmp.c -o memcmp.o
 
 memcpy.o: test_s21_memcpy.c
-	$(CC) $(CFLAGS) test_s21_memcpy.c -o memcpy.o  $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_memcpy.c -o memcpy.o
 
 memset.o: test_s21_memset.c
-	$(CC) $(CFLAGS) test_s21_memset.c -o memset.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_memset.c -o memset.o
 
 strchr.o: test_s21_strchr.c
-	$(CC) $(CFLAGS) test_s21_strchr.c -o strchr.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strchr.c -o strchr.o
 
 strcspn.o: test_s21_strcspn.c
-	$(CC) $(CFLAGS) test_s21_strcspn.c -o strcspn.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strcspn.c -o strcspn.o
 
 strerror.o: test_s21_strerror.c
-	$(CC) $(CFLAGS) test_s21_strerror.c -o strerror.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strerror.c -o strerror.o
 
 strlen.o: test_s21_strlen.c
-	$(CC) $(CFLAGS) test_s21_strlen.c -o strlen.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strlen.c -o strlen.o
 
 strncat.o: test_s21_strncat.c
-	$(CC) $(CFLAGS) test_s21_strncat.c -o strncat.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strncat.c -o strncat.o
 
 strncmp.o: test_s21_strncmp.c
-	$(CC) $(CFLAGS) test_s21_strncmp.c -o strncmp.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strncmp.c -o strncmp.o
 
 strncpy.o: test_s21_strncpy.c
-	$(CC) $(CFLAGS) test_s21_strncpy.c -o strncpy.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strncpy.c -o strncpy.o
 
 strpbrk.o: test_s21_strpbrk.c
-	$(CC) $(CFLAGS) test_s21_strpbrk.c -o strpbrk.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strpbrk.c -o strpbrk.o
 
 strrchr.o: test_s21_strrchr.c
-	$(CC) $(CFLAGS) test_s21_strrchr.c -o strrchr.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strrchr.c -o strrchr.o
 
 strstr.o: test_s21_strstr.c
-	$(CC) $(CFLAGS) test_s21_strstr.c -o strstr.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strstr.c -o strstr.o
 
 strtok.o: test_s21_strtok.c
-	$(CC) $(CFLAGS) test_s21_strtok.c -o strtok.o $(LDFLAGS)
+	$(CC) $(CFLAGS) test_s21_strtok.c -o strtok.o
 
 rebuild: clean all
 
