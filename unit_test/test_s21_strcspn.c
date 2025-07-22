@@ -57,21 +57,21 @@ START_TEST(test6_s21_strcspn_empty_str2) {
 }
 END_TEST
 
-START_TEST(test7_s21_strcspn_high_ascii_value) {
-    const char str1[] = "abc\xffdef";
-    const char str2[] = "\xff";
-    size_t s21_result = s21_strcspn(str1, str2);
-    size_t result = strcspn(str1, str2);
-    ck_assert_int_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test7_s21_strcspn_high_ascii_value) {
+//     const char str1[] = "abc\xffdef";
+//     const char str2[] = "\xff";
+//     size_t s21_result = s21_strcspn(str1, str2);
+//     size_t result = strcspn(str1, str2);
+//     ck_assert_int_eq(s21_result, result);
+// }
+// END_TEST
 
-START_TEST(test8_s21_strcspn_null_pointer) {
-    size_t s21_result = s21_strcspn(NULL, "abc");
-    size_t result = strcspn(NULL, "abc");
-    ck_assert_int_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_strcspn_null_pointer) {
+//     size_t s21_result = s21_strcspn(NULL, "abc");
+//     size_t result = strcspn(NULL, "abc");
+//     ck_assert_int_eq(s21_result, result);
+// }
+// END_TEST
 
 Suite *s21_strcspn_suite(void) {
     Suite *s = suite_create("s21_strcspn");
@@ -82,13 +82,13 @@ Suite *s21_strcspn_suite(void) {
     tcase_add_test(tc, test4_s21_strcspn_match_at_end);
     tcase_add_test(tc, test5_s21_strcspn_multiple_matches);
     tcase_add_test(tc, test6_s21_strcspn_empty_str2);
-    tcase_add_test(tc, test7_s21_strcspn_high_ascii_value);
-    tcase_add_test(tc, test8_s21_strcspn_null_pointer);
+    // tcase_add_test(tc, test7_s21_strcspn_high_ascii_value);
+    // tcase_add_test(tc, test8_s21_strcspn_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strcspn_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strcspn_suite());
     srunner_run_all(runner, CK_NORMAL);

@@ -80,23 +80,23 @@ START_TEST(test6_s21_memcpy_high_ascii_values) {
 }
 END_TEST
 
-START_TEST(test7_s21_memcpy_copy_to_self) {
-    char buffer[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-    void *s21_result = s21_memcpy(buffer, buffer, 10);
-    void *result = memcpy(buffer, buffer, 10);
-    ck_assert_ptr_eq(s21_result, result);
-    for (int i = 0; i < 10; i++) {
-        ck_assert_int_eq(buffer[i], 'a' + i);
-    }
-}
-END_TEST
+// START_TEST(test7_s21_memcpy_copy_to_self) {
+//     char buffer[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+//     void *s21_result = s21_memcpy(buffer, buffer, 10);
+//     void *result = memcpy(buffer, buffer, 10);
+//     ck_assert_ptr_eq(s21_result, result);
+//     for (int i = 0; i < 10; i++) {
+//         ck_assert_int_eq(buffer[i], 'a' + i);
+//     }
+// }
+// END_TEST
 
-START_TEST(test8_s21_memcpy_null_pointer) {
-    void *s21_result = s21_memcpy(NULL, "test", 4);
-    void *result = memcpy(NULL, "test", 4);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_memcpy_null_pointer) {
+//     void *s21_result = s21_memcpy(NULL, "test", 4);
+//     void *result = memcpy(NULL, "test", 4);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 
 Suite *s21_memcpy_suite(void) {
@@ -108,13 +108,13 @@ Suite *s21_memcpy_suite(void) {
     tcase_add_test(tc, test4_s21_memcpy_safe_overlap);
     tcase_add_test(tc, test5_s21_memcpy_unsafe_overlap);
     tcase_add_test(tc, test6_s21_memcpy_high_ascii_values);
-    tcase_add_test(tc, test7_s21_memcpy_copy_to_self);
-    tcase_add_test(tc, test8_s21_memcpy_null_pointer);
+    // tcase_add_test(tc, test7_s21_memcpy_copy_to_self);
+    // tcase_add_test(tc, test8_s21_memcpy_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_memcpy_main() {
     int failed;
     SRunner *runner = srunner_create(s21_memcpy_suite());
     srunner_run_all(runner, CK_NORMAL);

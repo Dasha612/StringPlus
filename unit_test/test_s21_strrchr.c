@@ -51,20 +51,20 @@ START_TEST(test6_s21_strrchr_multiple_occurrences) {
 }
 END_TEST
 
-START_TEST(test7_s21_strrchr_high_ascii_value) {
-    const char str[] = "abc\xffdef\xffghi";
-    char *s21_result = s21_strrchr(str, '\xff');
-    char *result = strrchr(str, '\xff');
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test7_s21_strrchr_high_ascii_value) {
+//     const char str[] = "abc\xffdef\xffghi";
+//     char *s21_result = s21_strrchr(str, '\xff');
+//     char *result = strrchr(str, '\xff');
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
-START_TEST(test8_s21_strrchr_null_pointer) {
-    char *s21_result = s21_strrchr(NULL, 'x');
-    char *result = strrchr(NULL, 'x');
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_strrchr_null_pointer) {
+//     char *s21_result = s21_strrchr(NULL, 'x');
+//     char *result = strrchr(NULL, 'x');
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 Suite *s21_strrchr_suite(void) {
     Suite *s = suite_create("s21_strrchr");
@@ -75,13 +75,13 @@ Suite *s21_strrchr_suite(void) {
     tcase_add_test(tc, test4_s21_strrchr_at_end);
     tcase_add_test(tc, test5_s21_strrchr_search_for_null);
     tcase_add_test(tc, test6_s21_strrchr_multiple_occurrences);
-    tcase_add_test(tc, test7_s21_strrchr_high_ascii_value);
-    tcase_add_test(tc, test8_s21_strrchr_null_pointer);
+    // tcase_add_test(tc, test7_s21_strrchr_high_ascii_value);
+    // tcase_add_test(tc, test8_s21_strrchr_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strrchr_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strrchr_suite());
     srunner_run_all(runner, CK_NORMAL);

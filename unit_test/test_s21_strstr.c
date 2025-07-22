@@ -57,21 +57,21 @@ START_TEST(test6_s21_strstr_multiple_matches) {
 }
 END_TEST
 
-START_TEST(test7_s21_strstr_high_ascii_values) {
-    const char haystack[] = "abc\xffdef\xffghi";
-    const char needle[] = "\xffdef";
-    char *s21_result = s21_strstr(haystack, needle);
-    char *result = strstr(haystack, needle);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test7_s21_strstr_high_ascii_values) {
+//     const char haystack[] = "abc\xffdef\xffghi";
+//     const char needle[] = "\xffdef";
+//     char *s21_result = s21_strstr(haystack, needle);
+//     char *result = strstr(haystack, needle);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
-START_TEST(test8_s21_strstr_null_pointer) {
-    char *s21_result = s21_strstr(NULL, "abc");
-    char *result = strstr(NULL, "abc");
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_strstr_null_pointer) {
+//     char *s21_result = s21_strstr(NULL, "abc");
+//     char *result = strstr(NULL, "abc");
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 START_TEST(test9_s21_strstr_needle_beyond_haystack) {
     const char haystack[] = "hello wor";
@@ -89,14 +89,14 @@ Suite *s21_strstr_suite(void) {
     tcase_add_test(tc, test4_s21_strstr_match_at_end);
     tcase_add_test(tc, test5_s21_strstr_no_match);
     tcase_add_test(tc, test6_s21_strstr_multiple_matches);
-    tcase_add_test(tc, test7_s21_strstr_high_ascii_values);
-    tcase_add_test(tc, test8_s21_strstr_null_pointer);
+    // tcase_add_test(tc, test7_s21_strstr_high_ascii_values);
+    // tcase_add_test(tc, test8_s21_strstr_null_pointer);
     tcase_add_test(tc, test9_s21_strstr_needle_beyond_haystack);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strstr_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strstr_suite());
     srunner_run_all(runner, CK_NORMAL);

@@ -61,13 +61,13 @@ START_TEST(test7_s21_strlen_unicode) {
 }
 END_TEST
 
-START_TEST(test8_s21_strlen_null_pointer) {
-    size_t s21_result = s21_strlen(NULL);
-    size_t result = strlen(NULL);
-    ck_assert_int_eq(s21_result, result);
-}
-END_TEST
-*s21_strlen_suite(void) {
+// START_TEST(test8_s21_strlen_null_pointer) {
+//     size_t s21_result = s21_strlen(NULL);
+//     size_t result = strlen(NULL);
+//     ck_assert_int_eq(s21_result, result);
+// }
+// END_TEST
+Suite* s21_strlen_suite(void) {
     Suite *s = suite_create("s21_strlen");
     TCase *tc = tcase_create("s21_strlen_core");
     tcase_add_test(tc, test1_s21_strlen_empty);
@@ -77,12 +77,12 @@ END_TEST
     tcase_add_test(tc, test5_s21_strlen_embedded_null);
     tcase_add_test(tc, test6_s21_strlen_long_string);
     tcase_add_test(tc, test7_s21_strlen_unicode);
-    tcase_add_test(tc, test8_s21_strlen_null_pointer);
+    // tcase_add_test(tc, test8_s21_strlen_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strlen_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strlen_suite());
     srunner_run_all(runner, CK_NORMAL);

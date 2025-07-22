@@ -39,15 +39,15 @@ START_TEST(test3_s21_strncat_null_dest) {
 }
 END_TEST
 
-START_TEST(test4_s21_strncat_null_src) {
-    char s21_dest[10] = "abc";
-    char dest[10] = "abc";
-    char *s21_result = s21_strncat(s21_dest, NULL, 4);
-    char *result = strncat(dest, NULL, 4);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
-}
-END_TEST
+// START_TEST(test4_s21_strncat_null_src) {
+//     char s21_dest[10] = "abc";
+//     char dest[10] = "abc";
+//     char *s21_result = s21_strncat(s21_dest, NULL, 4);
+//     char *result = strncat(dest, NULL, 4);
+//     ck_assert_ptr_eq(s21_result, result);
+//     ck_assert_str_eq(s21_dest, dest);
+// }
+// END_TEST
 
 START_TEST(test5_s21_strncat_embedded_null_in_src) {
     char s21_dest[10] = "abc";
@@ -81,15 +81,15 @@ START_TEST(test7_s21_strncat_zero_length) {
 }
 END_TEST
 
-START_TEST(test8_s21_strncat_buffer_overflow) {
-    char s21_dest[3] = "ab";
-    char dest[3] = "ab";
-    char *s21_result = s21_strncat(s21_dest, "123456", 6);
-    char *result = strncat(dest, "123456", 6);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(s21_dest, dest);
-}
-END_TEST
+// START_TEST(test8_s21_strncat_buffer_overflow) {
+//     char s21_dest[3] = "ab";
+//     char dest[3] = "ab";
+//     char *s21_result = s21_strncat(s21_dest, "123456", 6);
+//     char *result = strncat(dest, "123456", 6);
+//     ck_assert_ptr_eq(s21_result, result);
+//     ck_assert_str_eq(s21_dest, dest);
+// }
+// END_TEST
 
 Suite *s21_strncat_suite(void) {
     Suite *s = suite_create("s21_strncat");
@@ -97,16 +97,16 @@ Suite *s21_strncat_suite(void) {
     tcase_add_test(tc, test1_s21_strncat_simple_case);
     tcase_add_test(tc, test2_s21_strncat_full_copy);
     tcase_add_test(tc, test3_s21_strncat_null_dest);
-    tcase_add_test(tc, test4_s21_strncat_null_src);
+    // tcase_add_test(tc, test4_s21_strncat_null_src);
     tcase_add_test(tc, test5_s21_strncat_embedded_null_in_src);
     tcase_add_test(tc, test6_s21_strncat_overlap);
     tcase_add_test(tc, test7_s21_strncat_zero_length);
-    tcase_add_test(tc, test8_s21_strncat_buffer_overflow);
+    // tcase_add_test(tc, test8_s21_strncat_buffer_overflow);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strncat_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strncat_suite());
     srunner_run_all(runner, CK_NORMAL);

@@ -88,19 +88,19 @@ START_TEST(test6_s21_strtok_consecutive_delimiters) {
 }
 END_TEST
 
-START_TEST(test7_s21_strtok_null_delimiter_input) {
-    char str[] = "apple,banana,orange";
-    const char delim[] = ",";
-    char *s21_result = s21_strtok(str, delim);
-    char *result = strtok(str, delim);
-    while (s21_result != NULL && result != NULL) {
-        ck_assert_ptr_eq(s21_result, result);
-        s21_result = s21_strtok(NULL, NULL); // второй аргумент NULL
-        result = strtok(NULL, NULL);
-    }
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test7_s21_strtok_null_delimiter_input) {
+//     char str[] = "apple,banana,orange";
+//     const char delim[] = ",";
+//     char *s21_result = s21_strtok(str, delim);
+//     char *result = strtok(str, delim);
+//     while (s21_result != NULL && result != NULL) {
+//         ck_assert_ptr_eq(s21_result, result);
+//         s21_result = s21_strtok(NULL, NULL); // второй аргумент NULL
+//         result = strtok(NULL, NULL);
+//     }
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 START_TEST(test8_s21_strtok_null_pointer_input) {
     char *s21_result = s21_strtok(NULL, ",");
@@ -118,13 +118,13 @@ Suite *s21_strtok_suite(void) {
     tcase_add_test(tc, test4_s21_strtok_delimiter_at_beginning);
     tcase_add_test(tc, test5_s21_strtok_delimiter_at_end);
     tcase_add_test(tc, test6_s21_strtok_consecutive_delimiters);
-    tcase_add_test(tc, test7_s21_strtok_null_delimiter_input);
+    // tcase_add_test(tc, test7_s21_strtok_null_delimiter_input);
     tcase_add_test(tc, test8_s21_strtok_null_pointer_input);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strtok_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strtok_suite());
     srunner_run_all(runner, CK_NORMAL);

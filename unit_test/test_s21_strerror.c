@@ -73,7 +73,7 @@ Suite *s21_strerror_suite(void) {
     return s;
 }
 
-int main() {
+int s21_strerror_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strerror_suite());
     srunner_run_all(runner, CK_NORMAL);

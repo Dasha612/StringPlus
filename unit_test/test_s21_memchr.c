@@ -80,7 +80,8 @@ Suite *s21_memchr_suite(void) {
     suite_add_tcase(s, tc);
     return s;
 }
-int main() {
+
+int s21_memchr_main() {
     int failed;
     SRunner *runner = srunner_create(s21_memchr_suite());
     srunner_run_all(runner, CK_NORMAL);

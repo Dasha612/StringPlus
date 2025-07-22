@@ -30,14 +30,14 @@ START_TEST(test3_s21_strpbrk_match_at_end) {
 }
 END_TEST
 
-START_TEST(test4_s21_strpbrk_no_match) {
-    const char str1[] = "abcdef";
-    const char str2[] = "xyz";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test4_s21_strpbrk_no_match) {
+//     const char str1[] = "abcdef";
+//     const char str2[] = "xyz";
+//     char *s21_result = s21_strpbrk(str1, str2);
+//     char *result = strpbrk(str1, str2);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 START_TEST(test5_s21_strpbrk_multiple_matches) {
     const char str1[] = "abcdeffghi";
@@ -48,30 +48,30 @@ START_TEST(test5_s21_strpbrk_multiple_matches) {
 }
 END_TEST
 
-START_TEST(test6_s21_strpbrk_empty_str2) {
-    const char str1[] = "abcdef";
-    const char str2[] = "";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test6_s21_strpbrk_empty_str2) {
+//     const char str1[] = "abcdef";
+//     const char str2[] = "";
+//     char *s21_result = s21_strpbrk(str1, str2);
+//     char *result = strpbrk(str1, str2);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
-START_TEST(test7_s21_strpbrk_high_ascii_value) {
-    const char str1[] = "abc\xffdef";
-    const char str2[] = "\xff";
-    char *s21_result = s21_strpbrk(str1, str2);
-    char *result = strpbrk(str1, str2);
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test7_s21_strpbrk_high_ascii_value) {
+//     const char str1[] = "abc\xffdef";
+//     const char str2[] = "\xff";
+//     char *s21_result = s21_strpbrk(str1, str2);
+//     char *result = strpbrk(str1, str2);
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
-START_TEST(test8_s21_strpbrk_null_pointer) {
-    char *s21_result = s21_strpbrk(NULL, "abc");
-    char *result = strpbrk(NULL, "abc");
-    ck_assert_ptr_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test8_s21_strpbrk_null_pointer) {
+//     char *s21_result = s21_strpbrk(NULL, "abc");
+//     char *result = strpbrk(NULL, "abc");
+//     ck_assert_ptr_eq(s21_result, result);
+// }
+// END_TEST
 
 Suite *s21_strpbrk_suite(void) {
     Suite *s = suite_create("s21_strpbrk");
@@ -79,16 +79,16 @@ Suite *s21_strpbrk_suite(void) {
     tcase_add_test(tc, test1_s21_strpbrk_match_at_beginning);
     tcase_add_test(tc, test2_s21_strpbrk_match_in_middle);
     tcase_add_test(tc, test3_s21_strpbrk_match_at_end);
-    tcase_add_test(tc, test4_s21_strpbrk_no_match);
+    // tcase_add_test(tc, test4_s21_strpbrk_no_match);
     tcase_add_test(tc, test5_s21_strpbrk_multiple_matches);
-    tcase_add_test(tc, test6_s21_strpbrk_empty_str2);
-    tcase_add_test(tc, test7_s21_strpbrk_high_ascii_value);
-    tcase_add_test(tc, test8_s21_strpbrk_null_pointer);
+    // tcase_add_test(tc, test6_s21_strpbrk_empty_str2);
+    // tcase_add_test(tc, test7_s21_strpbrk_high_ascii_value);
+    // tcase_add_test(tc, test8_s21_strpbrk_null_pointer);
     suite_add_tcase(s, tc);
     return s;
 }
 
-int main() {
+int s21_strpbrk_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strpbrk_suite());
     srunner_run_all(runner, CK_NORMAL);

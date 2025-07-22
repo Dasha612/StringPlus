@@ -1,105 +1,71 @@
-#include <stdio.h>
-#include <string.h>
-#include "../src/s21_string.h"
+#include <check.h>
 
-void test_memchr();
-void test_memcmp();
-void test_memcpy();
-void test_memset();
-void test_strchr();
-void test_strcspn();
-void test_strerror();
-void test_strlen();
-void test_strncat();
-void test_strncmp();
-void test_strncpy();
-void test_strpbrk();
-void test_strrchr();
-void test_strstr();
-void test_strtok();
+Suite *s21_memchr_suite(void);
+Suite *s21_memcmp_suite(void);
+Suite *s21_memcpy_suite(void);
+Suite *s21_memset_suite(void);
+Suite *s21_strchr_suite(void);
+Suite *s21_strcspn_suite(void);
+Suite *s21_strerror_suite(void);
+Suite *s21_strlen_suite(void);
+Suite *s21_strncat_suite(void);
+Suite *s21_strncmp_suite(void);
+Suite *s21_strncpy_suite(void);
+Suite *s21_strpbrk_suite(void);
+Suite *s21_strrchr_suite(void);
+Suite *s21_strstr_suite(void);
+// Suite *sprintf_suite(void);
+// Suite *sscanf_suite(void);
+// Suite *toupper_suite(void);
+// Suite *tolower_suite(void);
+// Suite *insert_suite(void);
+// Suite *trim_suite(void);
 
-int main() {
-    test_memchr();
-    // test_memcmp();
-    // test_memcpy();
-    // test_memset();
-    // test_strchr();
-    // test_strcspn();
-    // test_strerror();
-    // test_strlen();
-    // test_strncat();
-    // test_strncmp();
-    // test_strncpy();
-    // test_strpbrk();
-    // test_strrchr();
-    // test_strstr();
-    // test_strtok();
-    return 0;
-}
+int s21_memchr_main(void);
+int s21_memcmp_main(void);
+int s21_memcpy_main(void);
+int s21_memset_main(void);
+int s21_strchr_main(void);
+int s21_strcspn_main(void);
+int s21_strerror_main(void);
+int s21_strlen_main(void);
+int s21_strncat_main(void);
+int s21_strncmp_main(void);
+int s21_strncpy_main(void);
+int s21_strpbrk_main(void);
+int s21_strrchr_main(void);
+int s21_strstr_main(void);
+// int sprintf_main(void);
+// int sscanf_main(void);
+// int toupper_main(void);
+// int tolower_main(void);
+// int insert_main(void);
+// int trim_main(void);
 
-void test_memchr() {
-    char *str = "Hello, World!";
-    void *s21_res = s21_memchr(str, 'W', 13);
-    void *res = memchr(str, 'W', 13);
-    printf("s21: %p\n", s21_res);
-    printf("res: %p\n", res);
+int main(void) {
+    int failed = 0;
+    failed += s21_memchr_main();
+    failed += s21_memcmp_main();
+    failed += s21_memcpy_main();
+    failed += s21_memset_main();
+    failed += s21_strchr_main();
+    failed += s21_strcspn_main();
+    failed += s21_strerror_main();
+    failed += s21_strlen_main();
+    failed += s21_strncat_main();
+    failed += s21_strncmp_main();
+    failed += s21_strncpy_main();
+    failed += s21_strpbrk_main();
+    failed += s21_strrchr_main();
+    failed += s21_strstr_main();
+    // failed += sprintf_main();
+    // failed += sscanf_main();
+    // failed += toupper_main();
+    // failed += tolower_main();
+    // failed += insert_main();
+    // failed += trim_main();
 
-    char *str2 = "";
-    void *s21_res2 = s21_memchr(str2, 'W', 13);
-    void *res2 = memchr(str2, 'W', 13);
-    printf("s21: %p\n", s21_res2);
-    printf("res: %p\n", res2);
+    return (failed == 0) ? 0 : 1;
 
-    char *str3 = "Hello, World!";
-    void *s21_res3 = s21_memchr(str3, 'W', 0);
-    void *res3 = memchr(str3, 'W', 0);
-    printf("s21: %p\n", s21_res3);
-    printf("res: %p\n", res3);
 
-    char *str4 = "Hello, World!";
-    void *s21_res4 = s21_memchr(str4, 'f', 1000);
-    void *res4 = memchr(str4, 'f', 1000);
-    printf("s21: %p\n", s21_res4);
-    printf("res: %p\n", res4);
-
-    // char *str5 = "Hello, World!";
-} 
-void test_memcmp() {
-    // code here
-}
-void test_memcpy() {
-    // code here
-}
-void test_memset() {
-    // code here
-}
-void test_strchr() {
-    // code here
-}
-void test_strcspn() {
-    // code here
-}
-void test_strerror() {
-    // code here
-}
-void test_strlen() {
-    // code here
-}
-void test_strncat() {
-    // code here
-}
-void test_strncmp() {
-    // code here
-}
-void test_strncpy() {
-    // code here
-}
-void test_strpbrk() {
-    // code here
-}
-void test_strrchr() {
-    // code here
-}
-void test_strstr() {
-    // code here
 }

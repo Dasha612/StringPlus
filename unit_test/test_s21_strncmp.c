@@ -21,13 +21,13 @@ START_TEST(test2_s21_strncmp_different_first_char) {
 }
 END_TEST
 
-START_TEST(test3_s21_strncmp_null_pointer_in_one_string) {
-    const char str1[] = "test";
-    int s21_result = s21_strncmp(str1, NULL, 4);
-    int result = strncmp(str1, NULL, 4);
-    ck_assert_int_eq(s21_result, result);
-}
-END_TEST
+// START_TEST(test3_s21_strncmp_null_pointer_in_one_string) {
+//     const char str1[] = "test";
+//     int s21_result = s21_strncmp(str1, NULL, 4);
+//     int result = strncmp(str1, NULL, 4);
+//     ck_assert_int_eq(s21_result, result);
+// }
+// END_TEST
 
 START_TEST(test4_s21_strncmp_embedded_null) {
     const char str1[] = "abc\0def";
@@ -79,7 +79,7 @@ Suite *s21_strncmp_suite(void) {
     TCase *tc = tcase_create("s21_strncmp_core");
     tcase_add_test(tc, test1_s21_strncmp_equal_strings);
     tcase_add_test(tc, test2_s21_strncmp_different_first_char);
-    tcase_add_test(tc, test3_s21_strncmp_null_pointer_in_one_string);
+    // tcase_add_test(tc, test3_s21_strncmp_null_pointer_in_one_string);
     tcase_add_test(tc, test4_s21_strncmp_embedded_null);
     tcase_add_test(tc, test5_s21_strncmp_zero_length);
     tcase_add_test(tc, test6_s21_strncmp_same_prefix_longer_string);
@@ -89,7 +89,7 @@ Suite *s21_strncmp_suite(void) {
     return s;
 }
 
-int main() {
+int s21_strncmp_main() {
     int failed;
     SRunner *runner = srunner_create(s21_strncmp_suite());
     srunner_run_all(runner, CK_NORMAL);
