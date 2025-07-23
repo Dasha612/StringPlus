@@ -7,9 +7,10 @@ int s21_memcmp(const void *str1, const void *str2, s21_size_t n){
     for (s21_size_t i = 0; i < n; i++) {
         
         if (str_1[i] != str_2[i]){
-            res = (str_1[i] < str_2[i]) ? -1 : 1;
+            res = str_1[i] - str_2[i];
             break;
         }
     }
     return res;
 }
+
