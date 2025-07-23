@@ -151,5 +151,5 @@ int s21_memcpy_main() {
     srunner_run_all(runner, CK_NORMAL);
     failed = srunner_ntests_failed(runner);
     srunner_free(runner);
-    return (failed == 0) ? 0 : 1;
+    return (failed == 0) ? 0 : failed;
 }

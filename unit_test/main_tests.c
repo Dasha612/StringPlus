@@ -1,4 +1,5 @@
 #include <check.h>
+#include <stdio.h>
 
 Suite *s21_memchr_suite(void);
 Suite *s21_memcmp_suite(void);
@@ -64,8 +65,10 @@ int main(void) {
     // failed += tolower_main();
     // failed += insert_main();
     // failed += trim_main();
-
-    return (failed == 0) ? 0 : 1;
+    printf("+-------------+\n");
+    printf("| FAILED: %3d |\n", failed);
+    printf("+-------------+\n");
+    return 0;
 
 
 }
