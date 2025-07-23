@@ -10,9 +10,9 @@ START_TEST(test1_s21_strncpy_simple_copy) {
     char s21_a[10] = {0};
     const char b[] = "hello";
     const char s21_b[] = "hello";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -24,9 +24,9 @@ START_TEST(test2_s21_strncpy_full_copy) {
     char s21_a[10] = {0};
     const char b[] = "abcdefg";
     const char s21_b[] = "abcdefg";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(a, "abcdefg");
 }
 END_TEST
@@ -38,9 +38,9 @@ START_TEST(test3_s21_strncpy_n_zero) {
     char s21_a[10] = "abcdefghi";
     const char b[] = "xyz";
     const char s21_b[] = "xyz";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -52,9 +52,9 @@ START_TEST(test4_s21_strncpy_n_bigger_than_src) {
     char s21_a[10] = {0};
     const char b[] = "abc";
     const char s21_b[] = "abc";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -66,9 +66,9 @@ START_TEST(test5_s21_strncpy_embedded_null_in_src) {
     char s21_a[10] = {0};
     const char b[] = "12\0345";
     const char s21_b[] = "12\0345";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -78,9 +78,11 @@ START_TEST(test6_s21_strncpy_overlap) {
     s21_size_t s21_n = 5;
     char a[10] = "123456789";
     char s21_a[10] = "123456789";
-    char *result = strncpy(a + 5, a, n);
-    char *s21_result = s21_strncpy(s21_a + 5, s21_a, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char res[10] = "";
+    char s21_res[10] = "";
+    strncpy(res, a, n);
+    s21_strncpy(s21_res, s21_a, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -92,9 +94,9 @@ START_TEST(test7_s21_strncpy_empty_src) {
     char s21_a[10] = {0};
     const char b[] = "";
     const char s21_b[] = "";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -106,9 +108,9 @@ START_TEST(test8_s21_strncpy_empty_dest) {
     char s21_a[10] = {0};
     const char b[] = "abc";
     const char s21_b[] = "abc";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST
@@ -120,9 +122,9 @@ START_TEST(test9_s21_strncpy_partial_copy) {
     char s21_a[10] = {0};
     const char b[] = "abcdef";
     const char s21_b[] = "abcdef";
-    char *result = strncpy(a, b, n);
-    char *s21_result = s21_strncpy(s21_a, s21_b, s21_n);
-    ck_assert_str_eq(s21_result, result);
+    char *res = strncpy(a, b, n);
+    char *s21_res = s21_strncpy(s21_a, s21_b, s21_n);
+    ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }
 END_TEST

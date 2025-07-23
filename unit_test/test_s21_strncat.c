@@ -122,8 +122,8 @@ START_TEST(test9_s21_strncat_empty_dest) {
     char a[10] = "";
     const char s21_b[] = "abc";
     const char b[] = "abc";
-    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
     char *res = strncat(a, b, n);
+    char *s21_res = s21_strncat(s21_a, s21_b, s21_n);
     ck_assert_str_eq(s21_res, res);
     ck_assert_str_eq(s21_a, a);
 }

@@ -7,24 +7,24 @@
 START_TEST(test1_s21_memcpy_zero_size) {
     size_t n = 0;
     s21_size_t s21_n = 0;
-    char dest[10] = "abcdefghij";
-    char src[10] = "1234567890";
-    void *s21_result = s21_memcpy(dest, src, s21_n);
-    void *result = memcpy(dest, src, n);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[10] = "abcdefghij";
+    char b[10] = "1234567890";
+    void *res = memcpy(a, b, n);
+    void *s21_res = s21_memcpy(a, b, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test2_s21_memcpy_small_buffer) {
     size_t n = 10;
     s21_size_t s21_n = 10;
-    char dest[10] = {0};
-    char src[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-    void *s21_result = s21_memcpy(dest, src, s21_n);
-    void *result = memcpy(dest, src, n);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[10] = {0};
+    char b[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+    void *res = memcpy(a, b, n);
+    void *s21_res = s21_memcpy(a, b, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     for (int i = 0; i < 10; i++) {
-        ck_assert_int_eq(dest[i], src[i]);
+        ck_assert_int_eq(a[i], b[i]);
     }
 }
 END_TEST
@@ -32,16 +32,16 @@ END_TEST
 START_TEST(test3_s21_memcpy_partial_large_buffer) {
     size_t n = 5;
     s21_size_t s21_n = 5;
-    char dest[10] = {0};
-    char src[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-    void *s21_result = s21_memcpy(dest + 2, src + 2, s21_n);
-    void *result = memcpy(dest + 2, src + 2, n);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[10] = {0};
+    char b[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+    void *res = memcpy(a + 2, b + 2, n);
+    void *s21_res = s21_memcpy(a + 2, b + 2, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     for (int i = 0; i < 10; i++) {
         if (i >= 2 && i < 7) {
-            ck_assert_int_eq(dest[i], src[i]);
+            ck_assert_int_eq(a[i], b[i]);
         } else {
-            ck_assert_int_eq(dest[i], 0); // проверка не затронутых частей
+            ck_assert_int_eq(a[i], 0); // проверка не затронутых частей
         }
     }
 }
@@ -51,9 +51,9 @@ START_TEST(test4_s21_memcpy_safe_overlap) {
     size_t n = 5;
     s21_size_t s21_n = 5;
     char buffer[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-    void *s21_result = s21_memcpy(buffer + 5, buffer, s21_n);
-    void *result = memcpy(buffer + 5, buffer, n);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memcpy(buffer + 5, buffer, n);
+    void *s21_res = s21_memcpy(buffer + 5, buffer, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     ck_assert_int_eq(buffer[5], 'a');
     ck_assert_int_eq(buffer[6], 'b');
     ck_assert_int_eq(buffer[7], 'c');
@@ -66,9 +66,9 @@ START_TEST(test5_s21_memcpy_unsafe_overlap) {
     size_t n = 5;
     s21_size_t s21_n = 5;
     char buffer[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-    void *s21_result = s21_memcpy(buffer, buffer + 5, s21_n);
-    void *result = memcpy(buffer, buffer + 5, n);
-    ck_assert_ptr_eq(s21_result, result);
+    void *res = memcpy(buffer, buffer + 5, n);
+    void *s21_res = s21_memcpy(buffer, buffer + 5, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     ck_assert_int_eq(buffer[0], 'f');
     ck_assert_int_eq(buffer[1], 'g');
     ck_assert_int_eq(buffer[2], 'h');
@@ -80,13 +80,13 @@ END_TEST
 START_TEST(test6_s21_memcpy_high_ascii_values) {
     size_t n = 5;
     s21_size_t s21_n = 5;
-    unsigned char dest[5] = {0};
-    unsigned char src[5] = {0xFF, 0xFE, 0xFD, 0xFC, 0xFB};
-    void *s21_result = s21_memcpy(dest, src, s21_n);
-    void *result = memcpy(dest, src, n);
-    ck_assert_ptr_eq(s21_result, result);
+    unsigned char a[5] = {0};
+    unsigned char b[5] = {0xFF, 0xFE, 0xFD, 0xFC, 0xFB};
+    void *res = memcpy(a, b, n);
+    void *s21_res = s21_memcpy(a, b, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     for (int i = 0; i < 5; i++) {
-        ck_assert_int_eq(dest[i], src[i]);
+        ck_assert_int_eq(a[i], b[i]);
     }
 }
 END_TEST
@@ -94,25 +94,25 @@ END_TEST
 START_TEST(test7_s21_memcpy_empty_src) {
     size_t n = 0;
     s21_size_t s21_n = 0;
-    char dest[5] = "abcd";
-    char src[1] = "";
-    void *s21_result = s21_memcpy(dest, src, s21_n);
-    void *result = memcpy(dest, src, n);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(dest, "abcd");
+    char a[5] = "abcd";
+    char b[1] = "";
+    void *res = memcpy(a, b, n);
+    void *s21_res = s21_memcpy(a, b, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
+    ck_assert_str_eq(a, "abcd");
 }
 END_TEST
 
 START_TEST(test8_s21_memcpy_partial_ascii) {
     size_t n = 4;
     s21_size_t s21_n = 4;
-    char dest[10] = "abcdefghij";
-    char src[10] = "1234567890";
-    void *s21_result = s21_memcpy(dest + 3, src + 3, s21_n);
-    void *result = memcpy(dest + 3, src + 3, n);
-    ck_assert_ptr_eq(s21_result, result);
+    char a[10] = "abcdefghij";
+    char b[10] = "1234567890";
+    void *res = memcpy(a + 3, b + 3, n);
+    void *s21_res = s21_memcpy(a + 3, b + 3, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
     for (int i = 3; i < 7; i++) {
-        ck_assert_int_eq(dest[i], src[i]);
+        ck_assert_int_eq(a[i], b[i]);
     }
 }
 END_TEST
@@ -120,12 +120,12 @@ END_TEST
 START_TEST(test9_s21_memcpy_all_same) {
     size_t n = 6;
     s21_size_t s21_n = 6;
-    char dest[6] = {0};
-    char src[6] = {'A', 'A', 'A', 'A', 'A', '\0'};
-    void *s21_result = s21_memcpy(dest, src, s21_n);
-    void *result = memcpy(dest, src, n);
-    ck_assert_ptr_eq(s21_result, result);
-    ck_assert_str_eq(dest, src);
+    char a[6] = {0};
+    char b[6] = {'A', 'A', 'A', 'A', 'A', '\0'};
+    void *res = memcpy(a, b, n);
+    void *s21_res = s21_memcpy(a, b, s21_n);
+    ck_assert_ptr_eq(s21_res, res);
+    ck_assert_str_eq(a, b);
 }
 END_TEST
 
