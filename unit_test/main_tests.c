@@ -17,10 +17,10 @@ Suite *s21_strrchr_suite(void);
 Suite *s21_strstr_suite(void);
 // Suite *sprintf_suite(void);
 // Suite *sscanf_suite(void);
-// Suite *toupper_suite(void);
-// Suite *tolower_suite(void);
-// Suite *insert_suite(void);
-// Suite *trim_suite(void);
+Suite *s21_toupper_suite(void);
+Suite *s21_tolower_suite(void);
+Suite *s21_insert_suite(void);
+Suite *s21_trim_suite(void);
 
 int s21_memchr_main(void);
 int s21_memcmp_main(void);
@@ -38,10 +38,10 @@ int s21_strrchr_main(void);
 int s21_strstr_main(void);
 // int sprintf_main(void);
 // int sscanf_main(void);
-// int toupper_main(void);
-// int tolower_main(void);
-// int insert_main(void);
-// int trim_main(void);
+int s21_toupper_main(void);
+int s21_tolower_main(void);
+int s21_insert_main(void);
+int s21_trim_main(void);
 
 int main(void) {
     int failed = 0;
@@ -61,10 +61,10 @@ int main(void) {
     failed += s21_strstr_main();
     // failed += sprintf_main();
     // failed += sscanf_main();
-    // failed += toupper_main();
-    // failed += tolower_main();
-    // failed += insert_main();
-    // failed += trim_main();
+    failed += s21_toupper_main();
+    failed += s21_tolower_main();
+    failed += s21_insert_main();
+    failed += s21_trim_main();
     printf("+-------------+\n");
     printf("| FAILED: %3d |\n", failed);
     printf("+-------------+\n");
