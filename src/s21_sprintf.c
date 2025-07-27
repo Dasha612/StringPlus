@@ -22,7 +22,7 @@ void process_specificator(const char **format, char **str, va_list args) {
     case 'c': write_char(str, args); break;
     // case 'd': write_decimal(); break;
     // case 'f': write_float(); break;
-    // case 's': write_string(); break;
+    case 's': write_string(str, args); break;
     // case 'u': write_unsined(); break;
     case '%': write_percent(str); break;
     default: ; // 
@@ -33,6 +33,13 @@ void process_specificator(const char **format, char **str, va_list args) {
 void write_char(char **str, va_list args) {
   char c = (char)va_arg(args, int);
   *(*str)++ = c;
+}
+
+void write_string(char **str, va_list args) {
+  char* string = (char*)va_arg(args, char*);
+  while (*string) {
+    *(*str)++ = *string++;
+  }
 }
 
 void write_percent(char **str) {
