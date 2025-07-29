@@ -50,7 +50,7 @@ void parse_width(const char **format, FormatFlags *flags) {
 int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags) {
   int status = 0;
   switch(**format) {
-    case 'c': write_char(str, args); break;
+    case 'c': write_char(str, args, flags); break;
     case 'd': write_decimal(str, args, flags); break;
     // case 'f': write_float(); break;
     case 's': write_string(str, args, flags); break;
@@ -62,9 +62,19 @@ int process_specificator(const char **format, char **str, va_list args, FormatFl
   return status;
 }
 
-void write_char(char **str, va_list args) {
+void write_char(char **str, va_list args, FormatFlags *flags) {
   char c = (char)va_arg(args, int);
+  int padding_width = flags->width - 1;
+
+  if (!flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
+  }
+
   *(*str)++ = c;
+
+  if (flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
+  }
 }
 
 void write_decimal(char **str, va_list args, FormatFlags *flags) {
