@@ -18,7 +18,7 @@ void write_sign(char **str, FormatFlags *flags);
 void write_padding(int padding_width, char **str);
 void write_char(char **str, va_list args);
 int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags);
-void write_string(char **str, va_list args);
+void write_string(char **str, va_list args, FormatFlags *flags);
 void write_decimal(char **str, va_list args, FormatFlags *flags);
 void write_percent(char **str);
 

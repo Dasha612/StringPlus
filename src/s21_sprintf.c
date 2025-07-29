@@ -53,7 +53,7 @@ int process_specificator(const char **format, char **str, va_list args, FormatFl
     case 'c': write_char(str, args); break;
     case 'd': write_decimal(str, args, flags); break;
     // case 'f': write_float(); break;
-    case 's': write_string(str, args); break;
+    case 's': write_string(str, args, flags); break;
     // case 'u': write_unsined(); break;
     case '%': write_percent(str); break;
     default: status = 1; break;
@@ -105,7 +105,7 @@ void write_decimal(char **str, va_list args, FormatFlags *flags) {
   }
 }
 
-void procces_zero_num(char **str, FormatFlags *flags) {
+void procces_zero_num(char **str, FormatFlags *flags) { //здесь дублирование кода убрать возможно?
   int padding_width = flags->width - 1;
   if (flags->is_negative || flags->plus || flags->space) {
     padding_width--;
@@ -141,10 +141,20 @@ void write_padding(int padding_width, char **str) {
   }
 }
 
-void write_string(char **str, va_list args) {
+void write_string(char **str, va_list args, FormatFlags *flags) {
   char* string = (char*)va_arg(args, char*);
+  int padding_width = flags->width - s21_strlen(string);
+
+  if (!flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
+  }
+
   while (*string) {
     *(*str)++ = *string++;
+  }
+
+  if (flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
   }
 }
 
