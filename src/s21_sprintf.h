@@ -7,12 +7,15 @@ typedef struct {
   int minus;
   int space;
   int width;
+  int percise;
+  int has_percise;
   int is_negative;
 } FormatFlags;
 
 int s21_sprintf(char *str, const char *format, ...);
 void parse_flags(const char **format, FormatFlags *flags);
 void parse_width(const char **format, FormatFlags *flags);
+void parse_percise(const char **format, FormatFlags *flags);
 void procces_zero_num(char **str, FormatFlags *flags);
 void write_sign(char **str, FormatFlags *flags);
 void write_padding(int padding_width, char **str);
