@@ -15,6 +15,7 @@ int s21_sprintf(char *str, const char *format, ...) {
       parse_flags(&format, &flags);
       parse_width(&format, &flags);
       parse_percise(&format, &flags);
+      parse_length(&format, &flags);
       status = process_specificator(&format, &str, args, &flags);
       if (status) {
         *str++ = '%';
@@ -60,6 +61,19 @@ void parse_percise(const char **format, FormatFlags *flags) {
   }
 }
 
+void parse_length(const char **format, FormatFlags *flags) {
+  switch (**format) {
+    case 'h': 
+      flags->length = 'h'; 
+    (*format)++;
+    break;
+      case 'l': flags->length = 'l'; 
+    (*format)++;
+    break;
+    default: break;
+  }
+}
+
 int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags) {
   int status = 0;
   switch(**format) {
@@ -91,7 +105,20 @@ void write_char(char **str, va_list args, FormatFlags *flags) {
 }
 
 void write_decimal(char **str, va_list args, FormatFlags *flags) {
-  int decimal = (int)va_arg(args, int);
+  long long int decimal = 0;
+  unsigned long long unsigned_decimal = 0;
+  switch (flags->length) {
+    case 'h':
+      decimal = (short)va_arg(args, int);
+      break;
+    case 'l':
+      decimal = (long int)va_arg(args, long int);
+      break;
+    default: 
+      decimal = (int)va_arg(args, int);
+      break;
+  }
+  
   char buf[24] = {0};
   int dec_len = 0;
   int percise_padding = 0;
@@ -99,15 +126,17 @@ void write_decimal(char **str, va_list args, FormatFlags *flags) {
  
   if (decimal < 0) {
     flags->is_negative = 1;
-    decimal = -decimal;
+    unsigned_decimal = (unsigned long long)(-(decimal + 1)) + 1;
+  } else {
+    unsigned_decimal = (unsigned long long)decimal;
   }
 
-  if (decimal == 0) {
+  if (unsigned_decimal == 0) {
     procces_zero_num(str, flags);
   } else {
-    while (decimal > 0) {
-      buf[dec_len++] = decimal % 10 + '0';
-      decimal /= 10;
+    while (unsigned_decimal > 0) {
+      buf[dec_len++] = unsigned_decimal % 10 + '0';
+      unsigned_decimal /= 10;
     }
 
     if (dec_len < flags->percise) {
