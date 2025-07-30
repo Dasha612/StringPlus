@@ -191,13 +191,21 @@ void write_padding(int padding_width, char **str) {
 
 void write_string(char **str, va_list args, FormatFlags *flags) {
   char* string = (char*)va_arg(args, char*);
-  int padding_width = flags->width - s21_strlen(string);
+  int str_len = s21_strlen(string);
+
+  if (flags->has_percise) {
+    if (flags->percise < str_len) {
+      str_len = flags->percise;
+    }
+  }
+
+  int padding_width = flags->width - str_len;
 
   if (!flags->minus && padding_width > 0) {
     write_padding(padding_width, str);
   }
 
-  while (*string) {
+  while (str_len-- > 0) {
     *(*str)++ = *string++;
   }
 
