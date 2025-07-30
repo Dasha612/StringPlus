@@ -10,6 +10,7 @@ typedef struct {
   int percise;
   int has_percise;
   int is_negative;
+  int is_unsigned;
   int length;
 } FormatFlags;
 

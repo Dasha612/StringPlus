@@ -81,7 +81,10 @@ int process_specificator(const char **format, char **str, va_list args, FormatFl
     case 'd': write_decimal(str, args, flags); break;
     // case 'f': write_float(); break;
     case 's': write_string(str, args, flags); break;
-    // case 'u': write_unsined(); break;
+    case 'u':
+      flags->is_unsigned = 1;
+      write_decimal(str, args, flags);
+      break;
     case '%': write_percent(str); break;
     default: status = 1; break;
   }
@@ -104,31 +107,47 @@ void write_char(char **str, va_list args, FormatFlags *flags) {
   }
 }
 
-void write_decimal(char **str, va_list args, FormatFlags *flags) {
+void write_decimal(char **str, va_list args, FormatFlags *flags) { // требуется рефакторинг
   long long int decimal = 0;
   unsigned long long unsigned_decimal = 0;
-  switch (flags->length) {
-    case 'h':
-      decimal = (short)va_arg(args, int);
-      break;
-    case 'l':
-      decimal = (long int)va_arg(args, long int);
-      break;
-    default: 
-      decimal = (int)va_arg(args, int);
-      break;
+  if (flags->is_unsigned) {
+    switch (flags->length) {
+      case 'h':
+        unsigned_decimal = (unsigned short)va_arg(args, unsigned int);
+        break;
+      case 'l':
+        unsigned_decimal = (unsigned long int)va_arg(args, unsigned long int);
+        break;
+      default: 
+        unsigned_decimal = (unsigned int)va_arg(args, unsigned int);
+        break;
+    }
+  } else {
+    switch (flags->length) {
+      case 'h':
+        decimal = (short)va_arg(args, int);
+        break;
+      case 'l':
+        decimal = (long int)va_arg(args, long int);
+        break;
+      default: 
+        decimal = (int)va_arg(args, int);
+        break;
+    }
   }
   
   char buf[24] = {0};
   int dec_len = 0;
   int percise_padding = 0;
   int padding_width = 0;
- 
-  if (decimal < 0) {
-    flags->is_negative = 1;
-    unsigned_decimal = (unsigned long long)(-(decimal + 1)) + 1;
-  } else {
-    unsigned_decimal = (unsigned long long)decimal;
+
+  if (!flags->is_unsigned) {
+    if (decimal < 0) {
+      flags->is_negative = 1;
+      unsigned_decimal = (unsigned long long)(-(decimal + 1)) + 1;
+    } else {
+      unsigned_decimal = (unsigned long long)decimal;
+    }
   }
 
   if (unsigned_decimal == 0) {
@@ -144,7 +163,7 @@ void write_decimal(char **str, va_list args, FormatFlags *flags) {
     }
 
     padding_width = flags->width - (dec_len + percise_padding);
-    if (flags->is_negative || flags->plus || flags->space) {
+    if ((flags->is_negative || flags->plus || flags->space) && !flags->is_unsigned) {
       padding_width--;
     }
 
@@ -152,7 +171,9 @@ void write_decimal(char **str, va_list args, FormatFlags *flags) {
       write_padding(padding_width, str);
     }
 
-    write_sign(str, flags);
+    if (!flags->is_unsigned) {
+      write_sign(str, flags);
+    }
     while (percise_padding > 0) {
       *(*str)++ = '0';
       percise_padding--;
