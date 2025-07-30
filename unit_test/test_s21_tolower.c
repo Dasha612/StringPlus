@@ -118,6 +118,7 @@ START_TEST(test8_s21_tolower_one_char) {
     char s3 = "Z";
     char res3 = "z";
     char *s21_res3 = s21_to_lower(s3);
+    ck_assert_str_eq(s21_res3, res3);
 }
 END_TEST
 
@@ -142,7 +143,6 @@ START_TEST(test10_s21_tolower_null) {
 
 }
 END_TEST
-
 
 Suite* s21_tolower_suite(void) {
     Suite *s = suite_create("s21_tolower");

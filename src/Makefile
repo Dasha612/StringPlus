@@ -20,6 +20,10 @@ SRC = s21_string.c \
 	  BASE/s21_strrchr.c \
   	  BASE/s21_strstr.c \
 	  BASE/s21_strtok.c \
+	  DOP/s21_insert.c \
+	  DOP/s21_trim.c \
+	  DOP/s21_to_upper.c \
+	  DOP/s21_to_lower.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -40,6 +44,7 @@ $(LIB_NAME): $(OBJ)
 	ar rcs $@ $^
 	ranlib $@
 	rm -f BASE/*.o
+	rm -f DOP/*.o
 	rm -f *.o
 	
 %.o: %.c
