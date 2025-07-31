@@ -110,13 +110,13 @@ START_TEST(test4_s21_insert_after_end_str) {
     char *str2 = "123";
     s21_size_t n2 = 100;
     char *s21_res2 = s21_insert(src2, str2, n2);
-    ck_assert_ptr_eq(s21_res2, NULL);
+    ck_assert_str_eq(s21_res2, NULL);
 
     char *src3 = "";
     char *str3 = "test";
     s21_size_t n3 = 1;
     char *s21_res3 = s21_insert(src3, str3, n3);
-    ck_assert_ptr_eq(s21_res3, NULL);
+    ck_assert_str_eq(s21_res3, NULL);
 
     char *src4 = "foo";
     char *str4 = "bar";
@@ -350,7 +350,7 @@ START_TEST(test12_s21_insert_with_spec_chars) {
 
     char *src3 = "C:Users";
     char *str3 = "\\";
-    s21_size_t n3 = 0;
+    s21_size_t n3 = 2;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "C:\\Users");
     free(s21_res3);

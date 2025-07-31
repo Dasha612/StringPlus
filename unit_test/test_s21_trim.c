@@ -37,7 +37,7 @@ START_TEST(test2_s21_trim_spases) {
     char *res3 = "Hello, World!";
     char *s21_res3 = s21_trim(s3, " ");
     ck_assert_str_eq(s21_res3, res3);
-    frer(s21_res3);
+    free(s21_res3);
 
     char *s4 = "   Hello   World   ";
     char *res4 = "Hello   World";
@@ -77,21 +77,21 @@ END_TEST
 
 START_TEST(test4_s21_trim_few_chars) {
     char *s1 = "hello, world";
-    char *res1 = "ellom worl";
+    char *res1 = "ello, worl";
     char trim_chars1[] = {'h', 'd'};
     char *s21_res1 = s21_trim(s1, trim_chars1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
     char *s2 = "hello, world";
-    char *res2 = "llo wor";
+    char *res2 = "o, wor";
     char trim_chars2[] = {'h', 'e', 'l', 'd'};
     char *s21_res2 = s21_trim(s2, trim_chars2);
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
 
     char *s3 = "abcbananabac";
-    char *res3 = "banana";
+    char *res3 = "nan";
     char trim_chars3[] = {'a', 'b', 'c'};
     char *s21_res3 = s21_trim(s3, trim_chars3);
     ck_assert_str_eq(s21_res3, res3);
@@ -193,22 +193,16 @@ END_TEST
 
 START_TEST(test9_s21_trim_src_equal_trim) {
     char *s1 = "apple banana";
-    char *res1 = "banana";
+    char *res1 = "banan";
     char *s21_res1 = s21_trim(s1, "apple ");
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
     char *s2 = "apple banana";
-    char *res2 = "pple";
-    char *s21_res2 = s21_trim(s2, "apple ");
+    char *res2 = "";
+    char *s21_res2 = s21_trim(s2, "abnple ");
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
-
-    char *s3 = "apple banana";
-    char *res3 = "";
-    char *s21_res3 = s21_trim(s3, "abnple ");
-    ck_assert_str_eq(s21_res3, res3);
-    free(s21_res3);
 }
 END_TEST
 

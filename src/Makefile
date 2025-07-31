@@ -32,7 +32,8 @@ TEST_SRC = ../unit_test/test_s21_memchr.c ../unit_test/test_s21_memcmp.c ../unit
 		   ../unit_test/test_s21_strerror.c ../unit_test/test_s21_strlen.c ../unit_test/test_s21_strncat.c \
 		   ../unit_test/test_s21_strncmp.c ../unit_test/test_s21_strncpy.c ../unit_test/test_s21_strpbrk.c \
 		   ../unit_test/test_s21_strrchr.c ../unit_test/test_s21_strstr.c ../unit_test/test_s21_strtok.c \
-		   ../unit_test/main_tests.c
+		   ../unit_test/test_s21_tolower.c ../unit_test/test_s21_toupper.c ../unit_test/test_s21_trim.c \
+		   ../unit_test/test_s21_insert.c ../unit_test/main_tests.c
 
 TEST_OBJS = $(TEST_SRC:.c=.o)
 
