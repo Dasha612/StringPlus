@@ -1,6 +1,5 @@
 #include <stdarg.h>
-#include <stdio.h> //temp
-#include "s21_strchr.h" //temp
+#include <math.h>
 
 typedef struct {
   int plus;
@@ -27,4 +26,4 @@ int process_specificator(const char **format, char **str, va_list args, FormatFl
 void write_string(char **str, va_list args, FormatFlags *flags);
 void write_decimal(char **str, va_list args, FormatFlags *flags);
 void write_percent(char **str);
-
+void write_float(char **str, va_list args, FormatFlags *flags);
