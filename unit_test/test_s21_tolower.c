@@ -2,8 +2,7 @@
 #include <check.h>
 #include <stdlib.h>
 #include "../src/s21_string.h"
-// Описание функции
-// Описание теста
+// void *to_lower(const char *str)
 START_TEST(test1_s21_tolower_usual) {
     char *s1 = "HelloWorld";
     char *res1 = "helloworld";

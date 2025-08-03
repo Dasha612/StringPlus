@@ -2,8 +2,7 @@
 #include <check.h>
 #include <stdlib.h>
 #include "../src/s21_string.h"
-// Описание функции
-// Описание теста
+// void *trim(const char *src, const char *trim_chars)
 START_TEST(test1_s21_trim_not_spaces) {
     char *s1 = "Hello, World!";
     char *res1 = "Hello, World!";

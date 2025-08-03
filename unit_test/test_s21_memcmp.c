@@ -2,8 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // int memcmp(const void *s1, const void *s2, size_t n) {
-// Сравнение memcmp и s21_memcmp
-
 START_TEST(test1_s21_memcmp_zero_size) {
     size_t n = 0;
     s21_size_t s21_n = 0;

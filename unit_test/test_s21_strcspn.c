@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // size_t strcspn(const char *s1, const char *reject)
-// Сравнение strcspn и s21_strcspn
 START_TEST(test1_s21_strcspn_no_match) {
     const char a[] = "abcdef";
     const char b[] = "xyz";

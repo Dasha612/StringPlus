@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strncpy(char *dest, const char *src, size_t n)
-// Сравнение strncpy и s21_strncpy
 START_TEST(test1_s21_strncpy_simple_copy) {
     size_t n = 5;
     s21_size_t s21_n = 5;

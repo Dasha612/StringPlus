@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strtok(char *str, const char *delim)
-// Сравнение strtok и s21_strtok
 START_TEST(test1_s21_strtok_simple_tokenization) {
     char a[] = "apple,banana,orange";
     const char b[] = ",";

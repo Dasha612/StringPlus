@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // size_t strlen(const char *s)
-// Сравнение strlen и s21_strlen
 START_TEST(test1_s21_strlen_empty) {
     const char s[] = "";
     size_t res = strlen(s);

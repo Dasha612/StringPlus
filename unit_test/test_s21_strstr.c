@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strstr(const char *haystack, const char *needle)
-// Сравнение strstr и s21_strstr
 START_TEST(test1_s21_strstr_empty_needle) {
     const char a[] = "hello";
     const char b[] = "";

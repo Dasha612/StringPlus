@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // int strncmp(const char *s1, const char *s2, size_t n)
-// Сравнение strncmp и s21_strncmp
 START_TEST(test1_s21_strncmp_equal_strings) {
     size_t n = 5;
     s21_size_t s21_n = 5;

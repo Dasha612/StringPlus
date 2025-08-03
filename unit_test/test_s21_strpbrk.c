@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strpbrk(const char *s, const char *accept)
-// Сравнение strpbrk и s21_strpbrk
 START_TEST(test1_s21_strpbrk_match_at_beginning) {
     const char a[] = "apple";
     const char b[] = "a";

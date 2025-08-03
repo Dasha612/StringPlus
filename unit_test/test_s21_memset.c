@@ -2,8 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // void *memset(void *s, int c, size_t n)
-// Сравнение memset и s21_memset
-
 START_TEST(test1_s21_memset_middle_one_byte) {
     size_t n = 1;
     s21_size_t s21_n = 1;

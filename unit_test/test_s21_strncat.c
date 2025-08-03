@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char* strncat(char *dest, const char *src, size_t n)
-// Сравнение strncat и s21_strncat
 START_TEST(test1_s21_strncat_simple_case) {
     size_t n = 3;
     s21_size_t s21_n = 3;

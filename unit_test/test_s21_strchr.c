@@ -2,8 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strchr(const char *s, int c)
-// Сравнение strchr и s21_strchr
-
 START_TEST(test1_s21_strchr_not_found) {
     const char str[] = "hello";
     char *res = strchr(str, 'x');

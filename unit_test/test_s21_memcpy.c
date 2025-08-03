@@ -2,8 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // void *memcpy(void *dest, const void *src, size_t n)
-// Сравнение memcpy и s21_memcpy
-
 START_TEST(test1_s21_memcpy_zero_size) {
     size_t n = 0;
     s21_size_t s21_n = 0;

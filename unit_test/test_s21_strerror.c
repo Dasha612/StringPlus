@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *strerror(int errnum)
-// Сравнение strerror и s21_strerror
 START_TEST(test1_s21_strerror_zero_code) {
     int errnum = 0;
     char *res = strerror(errnum);

@@ -2,7 +2,6 @@
 #include <check.h>
 #include "../src/s21_string.h"
 // char *memchr(const char *s, int c, size_t n) {
-// Сравнение memchr и s21_memchr
 START_TEST(test1_s21_memchr_zero_size) {
     size_t n = 0;
     s21_size_t s21_n = 0;

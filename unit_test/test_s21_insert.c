@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include "../src/s21_string.h"
 #include <string.h>
-// s21_insert(const char *src, const char *str, size_t start_index)
-// Возвращает новую строку, в которой указанная строка (str) вставлена 
-// в указанную позицию (start_index) в данной строке (src). 
-// В случае какой-либо ошибки следует вернуть значение NULL.
+// void* s21_insert(const char *src, const char *str, size_t start_index)
 START_TEST(test1_s21_insert_in_middle) {
     char *src1 = "HelloWorld";
     char *str1 = ", ";
@@ -110,13 +107,13 @@ START_TEST(test4_s21_insert_after_end_str) {
     char *str2 = "123";
     s21_size_t n2 = 100;
     char *s21_res2 = s21_insert(src2, str2, n2);
-    ck_assert_str_eq(s21_res2, NULL);
+    ck_assert_ptr_eq(s21_res2, NULL);
 
     char *src3 = "";
     char *str3 = "test";
     s21_size_t n3 = 1;
     char *s21_res3 = s21_insert(src3, str3, n3);
-    ck_assert_str_eq(s21_res3, NULL);
+    ck_assert_ptr_eq(s21_res3, NULL);
 
     char *src4 = "foo";
     char *str4 = "bar";
@@ -255,8 +252,7 @@ START_TEST(test9_s21_insert_str_is_null) {
     char *str3 = S21_NULL;
     s21_size_t n3 = 2;
     char *s21_res3 = s21_insert(src3, str3, n3);
-    ck_assert_str_eq(s21_res3, NULL);
-    free(s21_res3);
+    ck_assert_ptr_eq(s21_res3, NULL);
 }
 END_TEST
 
