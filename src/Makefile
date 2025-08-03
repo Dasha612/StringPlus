@@ -4,8 +4,7 @@ CFLAGS = -std=c11 -Wall -Wextra -Werror
 CFLAGS_TESTS = -std=c11 -Wall -Wextra -Werror -g -I../src
 LDFLAGS_TESTS = $(LIB_NAME) -lcheck -lcheck_pic -lm -pthread -lsubunit
 
-SRC = s21_string.c \
-      BASE/s21_memchr.c \
+SRC = BASE/s21_memchr.c \
       BASE/s21_memcmp.c \
       BASE/s21_memcpy.c \
 	  BASE/s21_memset.c \
@@ -23,7 +22,8 @@ SRC = s21_string.c \
 	  DOP/s21_insert.c \
 	  DOP/s21_trim.c \
 	  DOP/s21_to_upper.c \
-	  DOP/s21_to_lower.c 
+	  DOP/s21_to_lower.c \
+	  BASE/s21_sprintf.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,8 +32,8 @@ TEST_SRC = ../unit_test/test_s21_memchr.c ../unit_test/test_s21_memcmp.c ../unit
 		   ../unit_test/test_s21_strerror.c ../unit_test/test_s21_strlen.c ../unit_test/test_s21_strncat.c \
 		   ../unit_test/test_s21_strncmp.c ../unit_test/test_s21_strncpy.c ../unit_test/test_s21_strpbrk.c \
 		   ../unit_test/test_s21_strrchr.c ../unit_test/test_s21_strstr.c ../unit_test/test_s21_strtok.c \
-		   ../unit_test/test_s21_tolower.c ../unit_test/test_s21_toupper.c ../unit_test/test_s21_trim.c \
-		   ../unit_test/test_s21_insert.c ../unit_test/main_tests.c
+		   ../unit_test/test_s21_sprintf.c ../unit_test/test_s21_tolower.c ../unit_test/test_s21_toupper.c \
+		   ../unit_test/test_s21_trim.c ../unit_test/test_s21_insert.c ../unit_test/main_tests.c
 
 TEST_OBJS = $(TEST_SRC:.c=.o)
 
@@ -48,8 +48,6 @@ $(LIB_NAME): $(OBJ)
 	rm -f DOP/*.o
 	rm -f *.o
 	
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 # Правило для тестов
 test: $(TEST_OBJS)

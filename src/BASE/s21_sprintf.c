@@ -1,4 +1,34 @@
-#include "s21_sprintf.h"
+#include "../s21_string.h"
+#include <stdarg.h>
+#include <math.h>
+
+typedef struct {
+  int plus;
+  int minus;
+  int space;
+  int width;
+  int percise;
+  int has_percise;
+  int is_negative;
+  int is_unsigned;
+  int length;
+} FormatFlags;
+
+int s21_sprintf(char *str, const char *format, ...);
+void parse_flags(const char **format, FormatFlags *flags);
+void parse_width(const char **format, FormatFlags *flags);
+void parse_percise(const char **format, FormatFlags *flags);
+void parse_length(const char **format, FormatFlags *flags);
+void procces_zero_num(char **str, FormatFlags *flags);
+void write_sign(char **str, FormatFlags *flags);
+void write_padding(int padding_width, char **str);
+void write_char(char **str, va_list args, FormatFlags *flags);
+int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags);
+void write_string(char **str, va_list args, FormatFlags *flags);
+void write_decimal(char **str, va_list args, FormatFlags *flags);
+void write_percent(char **str);
+void write_float(char **str, va_list args, FormatFlags *flags);
+
 
 int s21_sprintf(char *str, const char *format, ...) {
   int status = 0;
@@ -79,7 +109,7 @@ int process_specificator(const char **format, char **str, va_list args, FormatFl
   switch(**format) {
     case 'c': write_char(str, args, flags); break;
     case 'd': write_decimal(str, args, flags); break;
-    // case 'f': write_float(); break;
+    case 'f': write_float(str, args, flags); break;
     case 's': write_string(str, args, flags); break;
     case 'u':
       flags->is_unsigned = 1;
@@ -266,4 +296,77 @@ void write_string(char **str, va_list args, FormatFlags *flags) {
 
 void write_percent(char **str) {
   *(*str)++ = '%';
+}
+
+void write_float(char **str, va_list args, FormatFlags *flags) {
+  char int_buf[1024];
+  char frac_buf[1024];
+  double value = va_arg(args, double);
+  char *str_nan = "nan";
+  char *str_inf = "fni";
+  int int_len = 0;
+  int frac_len = 0;
+
+  flags->is_negative = signbit(value);
+  if (isnan(value)) {
+    int_len = 3;
+    s21_strncpy(int_buf, str_nan, 3);
+  } else if (isinf(value)) {
+    int_len = 3;
+    s21_strncpy(int_buf, str_inf, 3);
+  } else {
+    if(!flags->has_percise) {
+      flags->percise = 6;
+    }
+    value = fabs(value);
+
+    double rounder = 0.5L;
+    for (int i = 0; i < flags->percise; i++) {
+      rounder /= 10.0L;
+    }
+    value += rounder;
+
+    long long integer = (long long)value;
+    double fractional = value - integer;
+    if (integer == 0) {
+      int_buf[int_len++] = '0';
+    }
+    while (integer > 0) {
+      int_buf[int_len++] = integer % 10 + '0';
+      integer /= 10;
+    }
+    for (int i = 0; i < flags->percise; i++) {
+      fractional *= 10L;
+      int digit = (int)fractional;
+      frac_buf[frac_len++] = '0' + digit;
+      fractional -= digit;
+    }
+  }
+
+  int padding_width = flags->width - (int_len + frac_len);
+  if (flags->is_negative || flags->plus || flags->space) {
+    padding_width--;
+  }
+  if (flags->percise > 0) {
+    padding_width--;
+  }
+  if (!flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
+  }
+
+  write_sign(str, flags);
+  while (int_len > 0) {
+    *(*str)++ = int_buf[--int_len];
+  }
+
+  if (flags->percise > 0) {
+    *(*str)++ = '.';
+    for (int i = 0; i < frac_len; i++) {
+      *(*str)++ = frac_buf[i];
+    }
+  }
+
+  if (flags->minus && padding_width > 0) {
+    write_padding(padding_width, str);
+  }
 }
