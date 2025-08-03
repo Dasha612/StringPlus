@@ -4,26 +4,26 @@ CFLAGS = -std=c11 -Wall -Wextra -Werror
 CFLAGS_TESTS = -std=c11 -Wall -Wextra -Werror -g -I../src
 LDFLAGS_TESTS = $(LIB_NAME) -lcheck -lcheck_pic -lm -pthread -lsubunit
 
-SRC = BASE/s21_memchr.c \
-      BASE/s21_memcmp.c \
-      BASE/s21_memcpy.c \
-	  BASE/s21_memset.c \
-	  BASE/s21_strchr.c \
-	  BASE/s21_strcspn.c \
-	  BASE/s21_strerror.c \
-	  BASE/s21_strlen.c \
-	  BASE/s21_strncat.c \
-	  BASE/s21_strncmp.c \
-	  BASE/s21_strncpy.c \
-	  BASE/s21_strpbrk.c \
-	  BASE/s21_strrchr.c \
-  	  BASE/s21_strstr.c \
-	  BASE/s21_strtok.c \
-	  DOP/s21_insert.c \
-	  DOP/s21_trim.c \
-	  DOP/s21_to_upper.c \
-	  DOP/s21_to_lower.c \
-	  BASE/s21_sprintf.c
+SRC = s21_memchr.c \
+      s21_memcmp.c \
+      s21_memcpy.c \
+	  s21_memset.c \
+	  s21_strchr.c \
+	  s21_strcspn.c \
+	  s21_strerror.c \
+	  s21_strlen.c \
+	  s21_strncat.c \
+	  s21_strncmp.c \
+	  s21_strncpy.c \
+	  s21_strpbrk.c \
+	  s21_strrchr.c \
+  	  s21_strstr.c \
+	  s21_strtok.c \
+	  s21_insert.c \
+	  s21_trim.c \
+	  s21_to_upper.c \
+	  s21_to_lower.c \
+	  s21_sprintf.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -67,7 +67,7 @@ clang:
 	clang-format -i $(SRC) $(TEST_SRC)
 
 clean:
-	rm -rf *.o *.a *.gc* *.info $(TEST_EXEC) BASE/*.o ../unit_test/*.o
+	rm -rf *.o *.a *.gc* *.info $(TEST_EXEC) ../unit_test/*.o
 
 rebuild: clean all
 

@@ -1,4 +1,4 @@
-#include "../s21_string.h"
+#include "s21_string.h"
 
 char *s21_strerror(int errnum) {
     static __thread char error_buf[256] = {0};

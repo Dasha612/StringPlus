@@ -1,5 +1,4 @@
-
-#include "../s21_string.h"
+#include "s21_string.h"
 
 void *s21_to_lower(const char *str){
     char* low = S21_NULL;
