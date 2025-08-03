@@ -3,6 +3,7 @@ LIB_NAME = s21_string.a
 CFLAGS = -std=c11 -Wall -Wextra -Werror
 CFLAGS_TESTS = -std=c11 -Wall -Wextra -Werror -g -I../src
 LDFLAGS_TESTS = $(LIB_NAME) -lcheck -lcheck_pic -lm -pthread -lsubunit
+GCOV_FLAGS = -fprofile-argc -ftest-coverage
 
 SRC = s21_memchr.c \
       s21_memcmp.c \
@@ -59,6 +60,14 @@ test: $(TEST_OBJS)
 ../unit_test/%.o: ../unit_test/%.c
 	$(CC) $(CFLAGS_TESTS) -c $< -o $@
 
+gcov_report: $(LIB_NAME)
+	$(CC) $(CFLAGS) --coverage $(TEST_SRC) $(SRC) $(LIB_NAME) -L. $(LIB_NAME) $(CFLAGS_TESTS) $(LDFLAGS_TESTS) -o $(TEST_EXEC)
+	./$(TEST_EXEC)
+	lcov -t "Report" -c -d ./ --output-file ./coverage.info
+	genhtml ./coverage.info --output-directory ./report/
+	open ./report/index.html
+	rm -f *.gc*
+
 cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem $(SRC) $(TEST_SRC)
 
@@ -68,6 +77,7 @@ clang:
 
 clean:
 	rm -rf *.o *.a *.gc* *.info $(TEST_EXEC) ../unit_test/*.o
+	rm -rf report/
 
 rebuild: clean all
 
