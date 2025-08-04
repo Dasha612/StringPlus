@@ -1,42 +1,4 @@
 #include "s21_string.h"
-#include <stdarg.h>
-#include <math.h>
-
-typedef struct {
-  int plus;
-  int minus;
-  int space;
-  int width;
-  int percise;
-  int has_percise;
-  int is_negative;
-  int is_unsigned;
-  int length;
-} FormatFlags;
-
-typedef struct {
-  char buffer[1024];
-  int length;
-} Buffer;
-
-int s21_sprintf(char *str, const char *format, ...);
-void parse_flags(const char **format, FormatFlags *flags);
-void parse_width(const char **format, FormatFlags *flags);
-void parse_percise(const char **format, FormatFlags *flags);
-void parse_length(const char **format, FormatFlags *flags);
-void procces_zero_num(char **str, FormatFlags *flags);
-void write_sign(char **str, FormatFlags *flags);
-void write_padding(int padding_width, char **str);
-void write_char(char **str, va_list args, FormatFlags *flags);
-int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags);
-void write_string(char **str, va_list args, FormatFlags *flags);
-void process_decimal(char **str, va_list args, FormatFlags *flags);
-void write_decimal(char **str, FormatFlags *flags, unsigned long long unsigned_decimal);
-void extract_decimal_arg(long long *decimal, unsigned long long *unsigned_decimal, va_list args, FormatFlags *flags);
-void write_percent(char **str);
-void process_float(char **str, va_list args, FormatFlags *flags);
-void write_float(char **str, FormatFlags *flags, Buffer *int_buf, Buffer *frac_buf);
-
 
 int s21_sprintf(char *str, const char *format, ...) {
   int status = 0;
