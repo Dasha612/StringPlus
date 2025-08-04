@@ -257,7 +257,7 @@ char *s21_strerror(int errnum) {
 #endif
 
     if (errnum < 0 || errnum > max_err) {
-        snprintf(error_buf, sizeof(error_buf), "Unknown error %d", errnum);
+        s21_sprintf(error_buf, "Unknown error %d", errnum);
     }
     else {
         s21_strncpy(error_buf, errors[errnum], sizeof(error_buf) - 1);
