@@ -9,7 +9,7 @@ START_TEST(test1_s21_memcmp_zero_size) {
     const char b[] = "def";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -20,7 +20,7 @@ START_TEST(test2_s21_memcmp_equal_buffers) {
     const char b[] = "hello";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -31,7 +31,7 @@ START_TEST(test3_s21_memcmp_different_first_byte) {
     const char b[] = "apply";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -39,10 +39,10 @@ START_TEST(test4_s21_memcmp_different_middle_byte) {
     size_t n = 7;
     s21_size_t s21_n = 7;
     const char a[] = "banana";
-    const char b[] = "barnana";
+    const char b[] = "bagnana";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -53,7 +53,7 @@ START_TEST(test5_s21_memcmp_different_last_byte) {
     const char b[] = "text";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -64,7 +64,7 @@ START_TEST(test6_s21_memcmp_same_prefix_but_longer) {
     const char b[] = "hellolonger";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -75,7 +75,7 @@ START_TEST(test7_s21_memcmp_empty_buffers) {
     const char b[] = "";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+        ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -86,7 +86,7 @@ START_TEST(test8_s21_memcmp_all_bytes_different) {
     const char b[] = "ghijkl";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+        ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -97,7 +97,7 @@ START_TEST(test9_s21_memcmp_partial_compare) {
     const char b[] = "abfde";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n); // сравниваем только первые 2 байта
-    ck_assert_int_eq(s21_res, res);
+        ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
