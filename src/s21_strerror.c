@@ -2,9 +2,15 @@
 
 char *s21_strerror(int errnum) {
     static __thread char error_buf[256] = {0};
+    struct error_info {
+        int max_err;
+        const char* descriptions[];
+    };
 
 #ifdef __linux__
-    static const char *errors[] = {
+    static const struct error_info linux_errors = {
+        .max_err = 134,
+        .descriptions = {
         [0] = "Success",
         [1] = "Operation not permitted",
         [2] = "No such file or directory",
@@ -139,12 +145,14 @@ char *s21_strerror(int errnum) {
         [131] = "State not recoverable",
         [132] = "Operation not possible due to RF-kill",
         [133] = "Memory page has hardware error",
-        [134] = "Unknown error"
+        [134] = "Unknown error"}
     };
-    const int max_err = 134;
+    const struct error_info *errors = &linux_errors;
 
 #elif __APPLE__
-    static const char * errors[] = {
+    static const struct error_info macos_errors = {
+        .max_err = 106,
+        .descriptions = {
         [0] = "Undefined error: 0",
         [1] = "Operation not permitted",
         [2] = "No such file or directory",
@@ -251,9 +259,11 @@ char *s21_strerror(int errnum) {
         [103] = "State not recoverable",
         [104] = "Previous owner died",
         [105] = "Interface output queue is full",
-        [106] = "Unknown error"
+        [106] = "Unknown error"}
     };
-    const int max_err = 106;
+    const struct error_info *errors = &macos_errors;
+#else
+    #error "Unsupported operating system"
 #endif
 
     if (errnum < 0 || errnum > max_err) {
