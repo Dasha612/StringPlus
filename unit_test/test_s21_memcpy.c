@@ -6,7 +6,7 @@ START_TEST(test1_s21_memcpy_zero_size) {
     size_t n = 0;
     s21_size_t s21_n = 0;
     char a[10] = "abcdefghij";
-    char b[10] = "1234567890";
+    const char b[10] = "1234567890";
     void *res = memcpy(a, b, n);
     void *s21_res = s21_memcpy(a, b, s21_n);
     ck_assert_ptr_eq(s21_res, res);
@@ -93,7 +93,7 @@ START_TEST(test7_s21_memcpy_empty_src) {
     size_t n = 0;
     s21_size_t s21_n = 0;
     char a[5] = "abcd";
-    char b[1] = "";
+    const char b[1] = "";
     void *res = memcpy(a, b, n);
     void *s21_res = s21_memcpy(a, b, s21_n);
     ck_assert_ptr_eq(s21_res, res);

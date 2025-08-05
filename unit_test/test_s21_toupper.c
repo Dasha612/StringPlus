@@ -4,13 +4,13 @@
 #include "../src/s21_string.h"
 // void *to_upper(const char *str)
 START_TEST(test1_s21_toupper_usual) {
-    char *s1 = "HelloWorld";
+    const char *s1 = "HelloWorld";
     char *res1 = "HELLOWORLD";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "IloveCoding";
+    const char *s2 = "IloveCoding";
     char *res2 = "ILOVECODING";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
@@ -19,13 +19,13 @@ START_TEST(test1_s21_toupper_usual) {
 END_TEST
 
 START_TEST(test2_s21_toupper_upper) {
-    char *s1 = "HELLOWORLD";
+    const char *s1 = "HELLOWORLD";
     char *res1 = "HELLOWORLD";  
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "ILOVECODING";
+    const char *s2 = "ILOVECODING";
     char *res2 = "ILOVECODING";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
@@ -34,13 +34,13 @@ START_TEST(test2_s21_toupper_upper) {
 END_TEST
 
 START_TEST(test3_s21_toupper_lower) {
-    char *s1 = "helloworld";
+    const char *s1 = "helloworld";
     char *res1 = "HELLOWORLD";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "ilovecoding";
+    const char *s2 = "ilovecoding";
     char *res2 = "ILOVECODING";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
@@ -49,7 +49,7 @@ START_TEST(test3_s21_toupper_lower) {
 END_TEST
 
 START_TEST(test4_s21_toupper_empty) {
-    char *s = "";
+    const char *s = "";
     char *res = "";
     char *s21_res = s21_to_upper(s);
     ck_assert_str_eq(s21_res, res);
@@ -58,25 +58,25 @@ START_TEST(test4_s21_toupper_empty) {
 END_TEST
 
 START_TEST(test5_s21_toupper_with_spaces) {
-    char *s1 = "Hello World";
+    const char *s1 = "Hello World";
     char *res1 = "HELLO WORLD";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "I Love Coding";
+    const char *s2 = "I Love Coding";
     char *res2 = "I LOVE CODING";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
 
-    char *s3 = "     ";
+    const char *s3 = "     ";
     char *res3 = "     ";
     char *s21_res3 = s21_to_upper(s3);
     ck_assert_str_eq(s21_res3, res3);
     free(s21_res3);
 
-    char *s4 = " ";
+    const char *s4 = " ";
     char *res4 = " ";
     char *s21_res4 = s21_to_upper(s4);
     ck_assert_str_eq(s21_res4, res4);
@@ -85,13 +85,13 @@ START_TEST(test5_s21_toupper_with_spaces) {
 END_TEST
 
 START_TEST(test6_s21_toupper_with_numbers) {
-    char *s1 = "1234567890";
+    const char *s1 = "1234567890";
     char *res1 = "1234567890";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "111";
+    const char *s2 = "111";
     char *res2 = "111";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
@@ -100,19 +100,19 @@ START_TEST(test6_s21_toupper_with_numbers) {
 END_TEST
 
 START_TEST(test7_s21_toupper_with_special_characters) {
-    char *s1 = "!Hello?World%%";
+    const char *s1 = "!Hello?World%%";
     char *res1 = "!HELLO?WORLD%%";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "1!2@3#4$5%%6^7&8*9(0)";
+    const char *s2 = "1!2@3#4$5%%6^7&8*9(0)";
     char *res2 = "1!2@3#4$5%%6^7&8*9(0)";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
 
-    char *s3 = "(I) {L}[o]|v|(e) {C}[o]|d|+i+-n-=g=";
+    const char *s3 = "(I) {L}[o]|v|(e) {C}[o]|d|+i+-n-=g=";
     char *res3 = "(I) {L}[O]|V|(E) {C}[O]|D|+I+-N-=G=";
     char *s21_res3 = s21_to_upper(s3);
     ck_assert_str_eq(s21_res3, res3);
@@ -121,19 +121,19 @@ START_TEST(test7_s21_toupper_with_special_characters) {
 END_TEST
 
 START_TEST(test8_s21_toupper_one_char) {
-    char *s1 = "a";
+    const char *s1 = "a";
     char *res1 = "A";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "b";
+    const char *s2 = "b";
     char *res2 = "B";
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
 
-    char *s3 = "z";
+    const char *s3 = "z";
     char *res3 = "Z";
     char *s21_res3 = s21_to_upper(s3);
     ck_assert_str_eq(s21_res3, res3);
@@ -142,13 +142,13 @@ START_TEST(test8_s21_toupper_one_char) {
 END_TEST
 
 START_TEST(test9_s21_toupper_zero_char) {
-    char *s1 = "0";
+    const char *s1 = "0";
     char *res1 = "0";
     char *s21_res1 = s21_to_upper(s1);
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
-    char *s2 = "\0";
+    const char *s2 = "\0";
     char *res2 = "\0";   // ??
     char *s21_res2 = s21_to_upper(s2);
     ck_assert_str_eq(s21_res2, res2);
@@ -157,7 +157,7 @@ START_TEST(test9_s21_toupper_zero_char) {
 END_TEST
 
 START_TEST(test10_s21_toupper_null) {
-    char *s = S21_NULL; // ?
+    const char *s = S21_NULL; // ?
     char *res = NULL;
     char *s21_res = s21_to_upper(s);
     ck_assert_ptr_eq(s21_res, res);

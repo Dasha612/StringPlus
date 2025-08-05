@@ -4,29 +4,29 @@
 #include <string.h>
 // void* s21_insert(const char *src, const char *str, size_t start_index)
 START_TEST(test1_s21_insert_in_middle) {
-    char *src1 = "HelloWorld";
-    char *str1 = ", ";
+    const char *src1 = "HelloWorld";
+    const char *str1 = ", ";
     s21_size_t n1 = 5;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "Hello, World");
     free(s21_res1);
 
-    char *src2 = "abcdef";
-    char *str2 = "123";
+    const char *src2 = "abcdef";
+    const char *str2 = "123";
     s21_size_t n2 = 3;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "abc123def");
     free(s21_res2);
 
-    char *src3 = "abcdef";
-    char *str3 = "";
+    const char *src3 = "abcdef";
+    const char *str3 = "";
     s21_size_t n3 = 2;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "abcdef");
     free(s21_res3);
 
-    char *src4 = "foo bar";
-    char *str4 = "123";
+    const char *src4 = "foo bar";
+    const char *str4 = "123";
     s21_size_t n4 = 4;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "foo 123bar");
@@ -35,29 +35,29 @@ START_TEST(test1_s21_insert_in_middle) {
 END_TEST
 
 START_TEST(test2_s21_insert_at_begin) {
-    char *src1 = "World";
-    char *str1 = "Hello ";
+    const char *src1 = "World";
+    const char *str1 = "Hello ";
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "Hello World");
     free(s21_res1);
 
-    char *src2 = "";
-    char *str2 = "Hello";
+    const char *src2 = "";
+    const char *str2 = "Hello";
     s21_size_t n2 = 0;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "Hello");
     free(s21_res2);
 
-    char *src3 = "Test";
-    char *str3 = "";
+    const char *src3 = "Test";
+    const char *str3 = "";
     s21_size_t n3 = 0;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "Test");
     free(s21_res3);
 
-    char *src4 = "data";
-    char *str4 = "@@@";
+    const char *src4 = "data";
+    const char *str4 = "@@@";
     s21_size_t n4 = 0;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "@@@data");
@@ -66,29 +66,29 @@ START_TEST(test2_s21_insert_at_begin) {
 END_TEST
 
 START_TEST(test3_s21_insert_at_end) {
-    char *src1 = "Hello";
-    char *str1 = " World";
+    const char *src1 = "Hello";
+    const char *str1 = " World";
     s21_size_t n1 = 5;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "Hello World");
     free(s21_res1);
 
-    char *src2 = "";
-    char *str2 = "Test";
+    const char *src2 = "";
+    const char *str2 = "Test";
     s21_size_t n2 = 0;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "Test");
     free(s21_res2);
 
-    char *src3 = "Data";
-    char *str3 = "";
+    const char *src3 = "Data";
+    const char *str3 = "";
     s21_size_t n3 = 4;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "Data");
     free(s21_res3);
 
-    char *src4 = "abc";
-    char *str4 = "@@@";
+    const char *src4 = "abc";
+    const char *str4 = "@@@";
     s21_size_t n4 = 3;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "abc@@@");
@@ -97,26 +97,26 @@ START_TEST(test3_s21_insert_at_end) {
 END_TEST
 
 START_TEST(test4_s21_insert_after_end_str) {
-    char *src1 = "Hello";
-    char *str1 = "World";
+    const char *src1 = "Hello";
+    const char *str1 = "World";
     s21_size_t n1 = 10;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_ptr_eq(s21_res1, NULL);
 
-    char *src2 = "abc";
-    char *str2 = "123";
+    const char *src2 = "abc";
+    const char *str2 = "123";
     s21_size_t n2 = 100;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_ptr_eq(s21_res2, NULL);
 
-    char *src3 = "";
-    char *str3 = "test";
+    const char *src3 = "";
+    const char *str3 = "test";
     s21_size_t n3 = 1;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_ptr_eq(s21_res3, NULL);
 
-    char *src4 = "foo";
-    char *str4 = "bar";
+    const char *src4 = "foo";
+    const char *str4 = "bar";
     s21_size_t n4 = 3;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "foobar");
@@ -126,28 +126,28 @@ START_TEST(test4_s21_insert_after_end_str) {
 END_TEST
 
 START_TEST(test5_s21_insert_into_empty_str) {
-    char *src1 = "";
-    char *str1 = "abc";
+    const char *src1 = "";
+    const char *str1 = "abc";
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "abc");
     free(s21_res1);
 
-    char *src2 = "";
-    char *str2 = "";
+    const char *src2 = "";
+    const char *str2 = "";
     s21_size_t n2 = 0;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "");
     free(s21_res2);
 
-    char *src3 = "";
-    char *str3 = "test";
+    const char *src3 = "";
+    const char *str3 = "test";
     s21_size_t n3 = 1;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_ptr_eq(s21_res3, NULL);
 
-    char *src4 = "";
-    char *str4 = "@@@";
+    const char *src4 = "";
+    const char *str4 = "@@@";
     s21_size_t n4 = 0;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "@@@");
@@ -156,36 +156,36 @@ START_TEST(test5_s21_insert_into_empty_str) {
 END_TEST
 
 START_TEST(test6_s21_insert_empty_str) {
-    char *src1 = "abc";
-    char *str1 = "";
+    const char *src1 = "abc";
+    const char *str1 = "";
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "abc");
     free(s21_res1);
 
-    char *src2 = "abc";
-    char *str2 = "";
+    const char *src2 = "abc";
+    const char *str2 = "";
     s21_size_t n2 = 1;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "abc");
     free(s21_res2);
 
-    char *src3 = "abc";
-    char *str3 = "";
+    const char *src3 = "abc";
+    const char *str3 = "";
     s21_size_t n3 = 3;
     char*s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "abc");
     free(s21_res3);
 
-    char *src4 = "";
-    char *str4 = "";
+    const char *src4 = "";
+    const char *str4 = "";
     s21_size_t n4 = 0;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "");
     free(s21_res4);
 
-    char *src5 = "abc";
-    char *str5 = "";
+    const char *src5 = "abc";
+    const char *str5 = "";
     s21_size_t n5 = 10;
     char *s21_res5 = s21_insert(src5, str5, n5);
     ck_assert_ptr_eq(s21_res5, NULL);
@@ -193,21 +193,21 @@ START_TEST(test6_s21_insert_empty_str) {
 END_TEST
 
 START_TEST(test7_s21_insert_src_str_empty) {
-    char *src1 = "";
-    char *str1 = "";
+    const char *src1 = "";
+    const char *str1 = "";
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "");
     free(s21_res1);
 
-    char *src2 = "";
-    char *str2 = "";
+    const char *src2 = "";
+    const char *str2 = "";
     s21_size_t n2 = 1;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_ptr_eq(s21_res2, NULL);
 
-    char *src3 = "";
-    char *str3 = "";
+    const char *src3 = "";
+    const char *str3 = "";
     s21_size_t n3 = 100;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_ptr_eq(s21_res3, NULL);
@@ -215,20 +215,20 @@ START_TEST(test7_s21_insert_src_str_empty) {
 END_TEST
 
 START_TEST(test8_s21_insert_src_is_null) {
-    char *src1 = S21_NULL;
-    char *str1 = "abc";
+    const char *src1 = S21_NULL;
+    const char *str1 = "abc";
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_ptr_eq(s21_res1, NULL);
 
-    char *src2 = S21_NULL;
-    char *str2 = "";
+    const char *src2 = S21_NULL;
+    const char *str2 = "";
     s21_size_t n2 = 0;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_ptr_eq(s21_res2, NULL);
 
-    char *src3 = S21_NULL;
-    char *str3 = "test";
+    const char *src3 = S21_NULL;
+    const char *str3 = "test";
     s21_size_t n3 = 5;
     char* s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_ptr_eq(s21_res3, NULL);
@@ -236,20 +236,20 @@ START_TEST(test8_s21_insert_src_is_null) {
 END_TEST
 
 START_TEST(test9_s21_insert_str_is_null) {
-    char *src1 = "abc";
-    char *str1 = S21_NULL;
+    const char *src1 = "abc";
+    const char *str1 = S21_NULL;
     s21_size_t n1 = 0;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_ptr_eq(s21_res1, NULL);
 
-    char *src2 = "";
-    char *str2 = S21_NULL;
+    const char *src2 = "";
+    const char *str2 = S21_NULL;
     s21_size_t n2 = 0;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_ptr_eq(s21_res2, NULL);
 
-    char *src3 = "test";
-    char *str3 = S21_NULL;
+    const char *src3 = "test";
+    const char *str3 = S21_NULL;
     s21_size_t n3 = 2;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_ptr_eq(s21_res3, NULL);
@@ -298,7 +298,7 @@ END_TEST
 
 START_TEST(test11_s21_insert_overlap_mem) {
     char *src1 = "abcdef";
-    char *str1 = "123";
+    const char *str1 = "123";
     s21_size_t n1 = 3;
     char src1_copy[sizeof(src1)];
     strcpy(src1_copy, src1);
@@ -308,7 +308,7 @@ START_TEST(test11_s21_insert_overlap_mem) {
     free(s21_res1);
 
     char *src2 = "hello";
-    char *str2 = "start-";
+    const char *str2 = "start-";
     s21_size_t n2 = 0;
     char src2_copy[sizeof(src2)];
     strcpy(src2_copy, src2);
@@ -318,7 +318,7 @@ START_TEST(test11_s21_insert_overlap_mem) {
     free(s21_res2);
 
     char *src3 = "end";
-    char *str3 = "-finish";
+    const char *str3 = "-finish";
     s21_size_t n3 = s21_strlen(src3);
     char src3_copy[sizeof(src3)];
     strcpy(src3_copy, src3);
@@ -330,36 +330,36 @@ START_TEST(test11_s21_insert_overlap_mem) {
 END_TEST
 
 START_TEST(test12_s21_insert_with_spec_chars) {
-    char *src1 = "HelloWorld";
-    char *str1 = "\n";
+    const char *src1 = "HelloWorld";
+    const char *str1 = "\n";
     s21_size_t n1 = 5;
     char *s21_res1 = s21_insert(src1, str1, n1);
     ck_assert_str_eq(s21_res1, "Hello\nWorld");
     free(s21_res1);
 
-    char *src2 = "foo bar";
-    char *str2 = "\t";
+    const char *src2 = "foo bar";
+    const char *str2 = "\t";
     s21_size_t n2 = 3;
     char *s21_res2 = s21_insert(src2, str2, n2);
     ck_assert_str_eq(s21_res2, "foo\t bar");
     free(s21_res2);
 
-    char *src3 = "C:Users";
-    char *str3 = "\\";
+    const char *src3 = "C:Users";
+    const char *str3 = "\\";
     s21_size_t n3 = 2;
     char *s21_res3 = s21_insert(src3, str3, n3);
     ck_assert_str_eq(s21_res3, "C:\\Users");
     free(s21_res3);
 
-    char *src4 = "abc";
-    char *str4 = "\n\t\\";
+    const char *src4 = "abc";
+    const char *str4 = "\n\t\\";
     s21_size_t n4 = 1;
     char *s21_res4 = s21_insert(src4, str4, n4);
     ck_assert_str_eq(s21_res4, "a\n\t\\bc");
     free(s21_res4);
 
-    char *src5 = "abcdef";
-    char str5[] = {'X', '\0', 'Y', 0};
+    const char *src5 = "abcdef";
+    const char str5[] = {'X', '\0', 'Y', 0};
     s21_size_t n5 = 3;
     char* s21_res5 = s21_insert(src5, str5, n5);
     ck_assert_str_eq(s21_res5, "abcXdef");

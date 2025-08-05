@@ -66,8 +66,10 @@ START_TEST(test7_s21_memchr_high_ascii_value) {
     size_t n = 4;
     s21_size_t s21_n = 4;
     unsigned char buffer[10] = {0x00, 0x01, 0xFF, 0x02};
-    void *res = memchr(buffer, -1, n);
-    void *s21_res = s21_memchr(buffer, -1, s21_n); // -1 → 0xFF
+
+    int c = -1;
+    void *res = memchr(buffer, (unsigned char)c, n);
+    void *s21_res = s21_memchr(buffer, (unsigned char)c, s21_n); // -1 → 0xFF
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST

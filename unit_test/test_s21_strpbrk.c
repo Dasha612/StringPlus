@@ -5,8 +5,8 @@
 START_TEST(test1_s21_strpbrk_match_at_beginning) {
     const char a[] = "apple";
     const char b[] = "a";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
@@ -14,8 +14,8 @@ END_TEST
 START_TEST(test2_s21_strpbrk_match_in_middle) {
     const char a[] = "banana";
     const char b[] = "n";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
@@ -23,8 +23,8 @@ END_TEST
 START_TEST(test3_s21_strpbrk_match_at_end) {
     const char a[] = "orange";
     const char b[] = "e";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
@@ -32,44 +32,44 @@ END_TEST
 START_TEST(test4_s21_strpbrk_space_match) {
     const char a[] = "abc def";
     const char b[] = " xyz";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test5_s21_strpbrk_multiple_matches) {
-    char a[] = "abcdeffghi";
+    const char a[] = "abcdeffghi";
     const char b[] = "fed";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test6_s21_strpbrk_no_match) {
-    char a[] = "abcdef";
+    const char a[] = "abcdef";
     const char b[] = "xyz";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test7_s21_strpbrk_empty_str1) {
-    char a[] = "";
+    const char a[] = "";
     const char b[] = "abc";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
 
 START_TEST(test8_s21_strpbrk_empty_str2) {
-    char a[] = "abcdef";
+    const char a[] = "abcdef";
     const char b[] = "";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST
@@ -77,8 +77,8 @@ END_TEST
 START_TEST(test9_s21_strpbrk_all_match) {
     const char a[] = "abc";
     const char b[] = "abc";
-    char *res = strpbrk(a, b);
-    char *s21_res = s21_strpbrk(a, b);
+    const char *res = strpbrk(a, b);
+    const char *s21_res = s21_strpbrk(a, b);
     ck_assert_ptr_eq(s21_res, res);
 }
 END_TEST

@@ -71,8 +71,8 @@ END_TEST
 START_TEST(test7_s21_memcmp_empty_buffers) {
     size_t n = 0;
     s21_size_t s21_n = 0;
-    char a[] = "";
-    char b[] = "";
+    const char a[] = "";
+    const char b[] = "";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
     ck_assert_int_eq(s21_res, res);
@@ -82,8 +82,8 @@ END_TEST
 START_TEST(test8_s21_memcmp_all_bytes_different) {
     size_t n = 6;
     s21_size_t s21_n = 6;
-    char a[] = "abcdef";
-    char b[] = "ghijkl";
+    const char a[] = "abcdef";
+    const char b[] = "ghijkl";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n);
     ck_assert_int_eq(s21_res, res);
@@ -93,8 +93,8 @@ END_TEST
 START_TEST(test9_s21_memcmp_partial_compare) {
     size_t n = 2;
     s21_size_t s21_n = 2;
-    char a[] = "abcde";
-    char b[] = "abfde";
+    const char a[] = "abcde";
+    const char b[] = "abfde";
     int res = memcmp(a, b, n);
     int s21_res = s21_memcmp(a, b, s21_n); // сравниваем только первые 2 байта
     ck_assert_int_eq(s21_res, res);
