@@ -1,5 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "../src/s21_string.h"
 // int sprintf(char *str, const char *format, ...) 
 // отправляет форматированный вывод в строку, на которую указывает str.

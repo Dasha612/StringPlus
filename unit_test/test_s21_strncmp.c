@@ -80,8 +80,8 @@ START_TEST(test7_s21_strncmp_high_ascii_values) {
 END_TEST
 
 START_TEST(test8_s21_strncmp_buffer_overflow) {
-    size_t n = 100;
-    s21_size_t s21_n = 100;
+    size_t n = 11;
+    s21_size_t s21_n = 12;
     const char a[] = "abcdefghij";
     const char b[] = "abcdexxxxxx";
     int res = strncmp(a, b, n);
