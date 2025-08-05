@@ -266,11 +266,12 @@ char *s21_strerror(int errnum) {
     #error "Unsupported operating system"
 #endif
 
-    if (errnum < 0 || errnum > max_err) {
+    if (errnum < 0 || errnum > errors->max_err) {
         s21_sprintf(error_buf, "Unknown error %d", errnum);
     }
     else {
-        s21_strncpy(error_buf, errors[errnum], sizeof(error_buf) - 1);
+        const char *err_msg = errors->descriptions[errnum];
+        s21_strncpy(error_buf, err_msg, sizeof(error_buf) - 1);
         error_buf[sizeof(error_buf) - 1] = '\0';
     }
     return error_buf;
