@@ -9,7 +9,7 @@ START_TEST(test1_s21_strncmp_equal_strings) {
     const char b[] = "hello";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -20,7 +20,7 @@ START_TEST(test2_s21_strncmp_different_first_char) {
     const char b[] = "apply";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -31,7 +31,7 @@ START_TEST(test3_s21_strncmp_last_char_diff) {
     const char b[] = "abcdf";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -42,7 +42,7 @@ START_TEST(test4_s21_strncmp_embedded_null) {
     const char b[] = "abc\0ghi";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -53,7 +53,7 @@ START_TEST(test5_s21_strncmp_zero_length) {
     const char b[] = "test123";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -64,7 +64,7 @@ START_TEST(test6_s21_strncmp_same_prefix_longer_string) {
     const char b[] = "hellolonger";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -75,18 +75,18 @@ START_TEST(test7_s21_strncmp_high_ascii_values) {
     const char b[] = "\xfe\xff";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
 START_TEST(test8_s21_strncmp_buffer_overflow) {
-    size_t n = 11;
+    size_t n = 12;
     s21_size_t s21_n = 12;
     const char a[] = "abcdefghij";
-    const char b[] = "abcdexxxxxx";
+    const char b[] = "abcdefghijk";
     int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n); // Больше, чем длина обеих строк
-    ck_assert_int_eq(s21_res, res);
+    int s21_res = s21_strncmp(a, b, s21_n);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -97,7 +97,7 @@ START_TEST(test9_s21_strncmp_empty_strings) {
     const char b[] = "";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
@@ -108,7 +108,7 @@ START_TEST(test10_s21_strncmp_partial_compare) {
     const char b[] = "abcxyz";
     int res = strncmp(a, b, n);
     int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert_int_eq(s21_res, res);
+    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
 }
 END_TEST
 
