@@ -77,29 +77,25 @@ END_TEST
 START_TEST(test4_s21_trim_few_chars) {
     const char *s1 = "hello, world";
     char *res1 = "ello, worl";
-    const char trim_chars1[] = {'h', 'd'};
-    char *s21_res1 = s21_trim(s1, trim_chars1);
+    char *s21_res1 = s21_trim(s1, "hd");
     ck_assert_str_eq(s21_res1, res1);
     free(s21_res1);
 
     const char *s2 = "hello, world";
     char *res2 = "o, wor";
-    const char trim_chars2[] = {'h', 'e', 'l', 'd'};
-    char *s21_res2 = s21_trim(s2, trim_chars2);
+    char *s21_res2 = s21_trim(s2, "held");
     ck_assert_str_eq(s21_res2, res2);
     free(s21_res2);
 
     const char *s3 = "abcbananabac";
     char *res3 = "nan";
-    const char trim_chars3[] = {'a', 'b', 'c'};
-    char *s21_res3 = s21_trim(s3, trim_chars3);
+    char *s21_res3 = s21_trim(s3, "abc");
     ck_assert_str_eq(s21_res3, res3);
     free(s21_res3);
 
     const char *s4 = "abcbaccbacbb";
     char *res4 = "";
-    const char trim_chars4[] = {'a', 'b', 'c'};
-    char *s21_res4 = s21_trim(s4, trim_chars4);
+    char *s21_res4 = s21_trim(s4, "abc");
     ck_assert_str_eq(s21_res4, res4);
     free(s21_res4);
 }
