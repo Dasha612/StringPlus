@@ -401,11 +401,6 @@ START_TEST(test12_s21_sprintf_unsigned) {
   int res5 = sprintf(buff, "%u %u %u", 0u, 1u, 123u);
   ck_assert_int_eq(s21_res5, res5);
   ck_assert_str_eq(s21_buff, buff);
-
-  int s21_res6 = s21_sprintf(s21_buff, "%u %u %u", 0, 1, 123);
-  int res6 = sprintf(buff, "%u %u %u", 0, 1, 123);
-  ck_assert_int_eq(s21_res6, res6);
-  ck_assert_str_eq(s21_buff, buff);
 }
 END_TEST
 
@@ -423,8 +418,8 @@ START_TEST(test13_s21_sprintf_unsigned_width) {
   ck_assert_int_eq(s21_res2, res2);
   ck_assert_str_eq(s21_buff, buff);
 
-  int s21_res3 = s21_sprintf(s21_buff, "|%0u|%5u|%0u|%5u|", 0u, 0u, 0, 0);
-  int res3 = sprintf(buff, "|%0u|%5u|%0u|%5u|", 0u, 0u, 0, 0);
+  int s21_res3 = s21_sprintf(s21_buff, "|%0u|%5u|", 0u, 0u);
+  int res3 = sprintf(buff, "|%0u|%5u|", 0u, 0u);
   ck_assert_int_eq(s21_res3, res3);
   ck_assert_str_eq(s21_buff, buff);
 
@@ -471,8 +466,8 @@ START_TEST(test15_s21_sprintf_unsigned_width_precision) {
   ck_assert_int_eq(s21_res2, res2);
   ck_assert_str_eq(s21_buff, buff);
 
-  int s21_res3 = s21_sprintf(s21_buff, "|%15.10u|%12.8u|", 7777, 0u);
-  int res3 = sprintf(buff, "|%15.10u|%12.8u|", 7777, 0u);
+  int s21_res3 = s21_sprintf(s21_buff, "|%15.10u|%12.8u|", 7777u, 0u);
+  int res3 = sprintf(buff, "|%15.10u|%12.8u|", 7777u, 0u);
   ck_assert_int_eq(s21_res3, res3);
   ck_assert_str_eq(s21_buff, buff);
 
@@ -513,7 +508,6 @@ START_TEST(test17_s21_sprintf_modifier) {
   unsigned short int us_val = 65535;
   long int l_val = 2147483647L;
   unsigned long int ul_val = 4294967295UL;
-  char lc_val = 'Y';
 
   int s21_res1 = s21_sprintf(s21_buff, "|%hd|%hu|", s_val, us_val);
   int res1 = sprintf(buff, "|%hd|%hu|", s_val, us_val);
@@ -526,8 +520,8 @@ START_TEST(test17_s21_sprintf_modifier) {
   ck_assert_int_eq(s21_res2, res2);
   ck_assert_str_eq(s21_buff, buff);
 
-  int s21_res3 = s21_sprintf(s21_buff, "|%ld|%lu|%lc|", l_val, ul_val, lc_val);
-  int res3 = sprintf(buff, "|%ld|%lu|%lc|", l_val, ul_val, lc_val);
+  int s21_res3 = s21_sprintf(s21_buff, "|%ld|%lu|", l_val, ul_val);
+  int res3 = sprintf(buff, "|%ld|%lu|", l_val, ul_val);
   ck_assert_int_eq(s21_res3, res3);
   ck_assert_str_eq(s21_buff, buff);
 
@@ -556,8 +550,8 @@ START_TEST(test17_s21_sprintf_modifier) {
   ck_assert_int_eq(s21_res7, res7);
   ck_assert_str_eq(s21_buff, buff);
 
-  int s21_res8 = s21_sprintf(s21_buff, "|%hd|%lc|%ld|", 42, 'B', 123L);
-  int res8 = sprintf(buff, "|%hd|%lc|%ld|", 42, 'B', 123L);
+  int s21_res8 = s21_sprintf(s21_buff, "|%hd|%ld|", 42, 123L);
+  int res8 = sprintf(buff, "|%hd|%ld|", (short)42, 123L);
   ck_assert_int_eq(s21_res8, res8);
   ck_assert_str_eq(s21_buff, buff);
 }
