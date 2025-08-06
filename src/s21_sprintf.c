@@ -1,5 +1,6 @@
-#include <stdarg.h>
 #include <math.h>
+#include <stdarg.h>
+
 #include "s21_string.h"
 
 typedef struct {
@@ -27,14 +28,19 @@ static void procces_zero_num(char **str, const FormatFlags *flags);
 static void write_sign(char **str, const FormatFlags *flags);
 static void write_padding(int padding_width, char **str);
 static void write_char(char **str, va_list args, const FormatFlags *flags);
-static int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags);
+static int process_specificator(const char **format, char **str, va_list args,
+                                FormatFlags *flags);
 static void write_string(char **str, va_list args, const FormatFlags *flags);
 static void process_decimal(char **str, va_list args, FormatFlags *flags);
-static void write_decimal(char **str, const FormatFlags *flags, unsigned long long unsigned_decimal);
-static void extract_decimal_arg(long long *decimal, unsigned long long *unsigned_decimal, va_list args, const FormatFlags *flags);
+static void write_decimal(char **str, const FormatFlags *flags,
+                          unsigned long long unsigned_decimal);
+static void extract_decimal_arg(long long *decimal,
+                                unsigned long long *unsigned_decimal,
+                                va_list args, const FormatFlags *flags);
 static void write_percent(char **str);
 static void process_float(char **str, va_list args, FormatFlags *flags);
-static void write_float(char **str, const FormatFlags *flags, Buffer *int_buf, Buffer *frac_buf);
+static void write_float(char **str, const FormatFlags *flags, Buffer *int_buf,
+                        Buffer *frac_buf);
 
 int s21_sprintf(char *str, const char *format, ...) {
   const char *str_start = str;
@@ -67,10 +73,17 @@ static void parse_flags(const char **format, FormatFlags *flags) {
   const char *flags_str = "+- ";
   while (s21_strchr(flags_str, **format)) {
     switch (**format) {
-      case '+': flags->plus = 1; break;
-      case '-': flags->minus = 1; break;
-      case ' ': flags->space = 1; break;
-      default: break;
+      case '+':
+        flags->plus = 1;
+        break;
+      case '-':
+        flags->minus = 1;
+        break;
+      case ' ':
+        flags->space = 1;
+        break;
+      default:
+        break;
     }
     (*format)++;
   }
@@ -98,30 +111,45 @@ static void parse_percise(const char **format, FormatFlags *flags) {
 
 static void parse_length(const char **format, FormatFlags *flags) {
   switch (**format) {
-    case 'h': 
-      flags->length = 'h'; 
-    (*format)++;
-    break;
-      case 'l': flags->length = 'l'; 
-    (*format)++;
-    break;
-    default: break;
+    case 'h':
+      flags->length = 'h';
+      (*format)++;
+      break;
+    case 'l':
+      flags->length = 'l';
+      (*format)++;
+      break;
+    default:
+      break;
   }
 }
 
-static int process_specificator(const char **format, char **str, va_list args, FormatFlags *flags) {
+static int process_specificator(const char **format, char **str, va_list args,
+                                FormatFlags *flags) {
   int status = 0;
-  switch(**format) {
-    case 'c': write_char(str, args, flags); break;
-    case 'd': process_decimal(str, args, flags); break;
-    case 'f': process_float(str, args, flags); break;
-    case 's': write_string(str, args, flags); break;
+  switch (**format) {
+    case 'c':
+      write_char(str, args, flags);
+      break;
+    case 'd':
+      process_decimal(str, args, flags);
+      break;
+    case 'f':
+      process_float(str, args, flags);
+      break;
+    case 's':
+      write_string(str, args, flags);
+      break;
     case 'u':
       flags->is_unsigned = 1;
       process_decimal(str, args, flags);
       break;
-    case '%': write_percent(str); break;
-    default: status = 1; break;
+    case '%':
+      write_percent(str);
+      break;
+    default:
+      status = 1;
+      break;
   }
   (*format)++;
   return status;
@@ -146,7 +174,7 @@ static void process_decimal(char **str, va_list args, FormatFlags *flags) {
   long long int decimal = 0;
   unsigned long long unsigned_decimal = 0;
   extract_decimal_arg(&decimal, &unsigned_decimal, args, flags);
-  
+
   if (!flags->is_unsigned) {
     if (decimal < 0) {
       flags->is_negative = 1;
@@ -163,7 +191,9 @@ static void process_decimal(char **str, va_list args, FormatFlags *flags) {
   }
 }
 
-static void extract_decimal_arg(long long *decimal, unsigned long long *unsigned_decimal, va_list args, const FormatFlags *flags) {
+static void extract_decimal_arg(long long *decimal,
+                                unsigned long long *unsigned_decimal,
+                                va_list args, const FormatFlags *flags) {
   if (flags->is_unsigned) {
     switch (flags->length) {
       case 'h':
@@ -172,7 +202,7 @@ static void extract_decimal_arg(long long *decimal, unsigned long long *unsigned
       case 'l':
         *unsigned_decimal = (unsigned long int)va_arg(args, unsigned long int);
         break;
-      default: 
+      default:
         *unsigned_decimal = (unsigned int)va_arg(args, unsigned int);
         break;
     }
@@ -184,14 +214,15 @@ static void extract_decimal_arg(long long *decimal, unsigned long long *unsigned
       case 'l':
         *decimal = (long int)va_arg(args, long int);
         break;
-      default: 
+      default:
         *decimal = (int)va_arg(args, int);
         break;
     }
   }
 }
 
-static void write_decimal(char **str, const FormatFlags *flags, unsigned long long unsigned_decimal) {
+static void write_decimal(char **str, const FormatFlags *flags,
+                          unsigned long long unsigned_decimal) {
   char buf[24] = {0};
   int dec_len = 0;
   int percise_padding = 0;
@@ -206,7 +237,8 @@ static void write_decimal(char **str, const FormatFlags *flags, unsigned long lo
   }
 
   padding_width = flags->width - (dec_len + percise_padding);
-  if ((flags->is_negative || flags->plus || flags->space) && !flags->is_unsigned) {
+  if ((flags->is_negative || flags->plus || flags->space) &&
+      !flags->is_unsigned) {
     padding_width--;
   }
 
@@ -282,7 +314,7 @@ static void write_padding(int padding_width, char **str) {
 }
 
 static void write_string(char **str, va_list args, const FormatFlags *flags) {
-  const char* string = (char*)va_arg(args, char*);
+  const char *string = (char *)va_arg(args, char *);
   int str_len = s21_strlen(string);
 
   if (flags->has_percise) {
@@ -306,9 +338,7 @@ static void write_string(char **str, va_list args, const FormatFlags *flags) {
   }
 }
 
-static void write_percent(char **str) {
-  *(*str)++ = '%';
-}
+static void write_percent(char **str) { *(*str)++ = '%'; }
 
 static void process_float(char **str, va_list args, FormatFlags *flags) {
   Buffer int_buf = {0};
@@ -323,7 +353,7 @@ static void process_float(char **str, va_list args, FormatFlags *flags) {
     int_buf.length = 3;
     s21_strncpy(int_buf.buffer, "fni", 3);
   } else {
-    if(!flags->has_percise) {
+    if (!flags->has_percise) {
       flags->percise = 6;
     }
     value = fabs(value);
@@ -353,7 +383,8 @@ static void process_float(char **str, va_list args, FormatFlags *flags) {
   write_float(str, flags, &int_buf, &frac_buf);
 }
 
-static void write_float(char **str, const FormatFlags *flags, Buffer *int_buf, Buffer *frac_buf) {
+static void write_float(char **str, const FormatFlags *flags, Buffer *int_buf,
+                        Buffer *frac_buf) {
   int padding_width = flags->width - (int_buf->length + frac_buf->length);
   if (flags->is_negative || flags->plus || flags->space) {
     padding_width--;

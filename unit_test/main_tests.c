@@ -46,32 +46,30 @@ int s21_insert_main(void);
 int s21_trim_main(void);
 
 int main(void) {
-    int failed = 0;
-    failed += s21_memchr_main();
-    failed += s21_memcmp_main();
-    failed += s21_memcpy_main();
-    failed += s21_memset_main();
-    failed += s21_strchr_main();
-    failed += s21_strcspn_main();
-    failed += s21_strerror_main();
-    failed += s21_strlen_main();
-    failed += s21_strncat_main();
-    failed += s21_strncmp_main();
-    failed += s21_strncpy_main();
-    failed += s21_strpbrk_main();
-    failed += s21_strrchr_main();
-    failed += s21_strstr_main();
-    failed += s21_strtok_main();
-    failed += s21_sprintf_main();
-    // failed += sscanf_main();
-    failed += s21_toupper_main();
-    failed += s21_tolower_main();
-    failed += s21_insert_main();
-    failed += s21_trim_main();
-    printf("+-------------+\n");
-    printf("| FAILED: %3d |\n", failed);
-    printf("+-------------+\n");
-    return 0;
-
-
+  int failed = 0;
+  failed += s21_memchr_main();
+  failed += s21_memcmp_main();
+  failed += s21_memcpy_main();
+  failed += s21_memset_main();
+  failed += s21_strchr_main();
+  failed += s21_strcspn_main();
+  failed += s21_strerror_main();
+  failed += s21_strlen_main();
+  failed += s21_strncat_main();
+  failed += s21_strncmp_main();
+  failed += s21_strncpy_main();
+  failed += s21_strpbrk_main();
+  failed += s21_strrchr_main();
+  failed += s21_strstr_main();
+  failed += s21_strtok_main();
+  failed += s21_sprintf_main();
+  // failed += sscanf_main();
+  failed += s21_toupper_main();
+  failed += s21_tolower_main();
+  failed += s21_insert_main();
+  failed += s21_trim_main();
+  printf("+-------------+\n");
+  printf("| FAILED: %3d |\n", failed);
+  printf("+-------------+\n");
+  return 0;
 }
