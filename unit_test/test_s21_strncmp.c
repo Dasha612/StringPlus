@@ -3,112 +3,140 @@
 #include "../src/s21_string.h"
 // int strncmp(const char *s1, const char *s2, size_t n)
 START_TEST(test1_s21_strncmp_equal_strings) {
-    size_t n = 5;
-    s21_size_t s21_n = 5;
-    const char a[] = "hello";
-    const char b[] = "hello";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"apple", "apple"},
+        {"test1", "test1"},
+        {"caseA", "caseA"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 5);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 5);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
-START_TEST(test2_s21_strncmp_different_first_char) {
-    size_t n = 5;
-    s21_size_t s21_n = 5;
-    const char a[] = "apple";
-    const char b[] = "apply";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+START_TEST(test2_s21_strncmp_different_last_char) {
+    struct { const char *a; const char *b; } cases[] = {
+        {"apple", "apply"},
+        {"test1", "test2"},
+        {"caseA", "caseB"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 5);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 5);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
-START_TEST(test3_s21_strncmp_last_char_diff) {
-    size_t n = 5;
-    s21_size_t s21_n = 5;
-    const char a[] = "abcde";
-    const char b[] = "abcdf";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+START_TEST(test3_s21_strncmp_different_first_char) {
+    struct { const char *a; const char *b; } cases[] = {
+        {"kbcde", "abcde"},
+        {"Zebra", "apple"},
+        {"9start", "1start"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 5);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 5);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test4_s21_strncmp_embedded_null) {
-    size_t n = 6;
-    s21_size_t s21_n = 6;
-    const char a[] = "abc\0def";
-    const char b[] = "abc\0ghi";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"abc\0def", "abc\0ghi"},
+        {"1\0xxxx", "1\0yyyy"},
+        {"\0hidden", "\0data"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 6);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 6);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test5_s21_strncmp_zero_length) {
-    size_t n = 0;
-    s21_size_t s21_n = 0;
-    const char a[] = "test";
-    const char b[] = "test123";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"test3", "test123"},
+        {"", ""},
+        {"abc", "def"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 0);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 0);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test6_s21_strncmp_same_prefix_longer_string) {
-    size_t n = 5;
-    s21_size_t s21_n = 5;
-    const char a[] = "hello";
-    const char b[] = "hellolonger";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"hello", "hellolonger"},
+        {"short", "shorter"},
+        {"pre", "prefix"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 5);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 5);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test7_s21_strncmp_high_ascii_values) {
-    size_t n = 2;
-    s21_size_t s21_n = 2;
-    const char a[] = "\xff\xfe";
-    const char b[] = "\xfe\xff";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"\xff\xfe", "\xfe\xff"},
+        {"\x80\x81", "\x7f\x82"},
+        {"\xff\xff", "\xff\xfe"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 2);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 2);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test8_s21_strncmp_buffer_overflow) {
-    size_t n = 12;
-    s21_size_t s21_n = 12;
-    const char a[] = "abcdefghij";
-    const char b[] = "abcdefghijk";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b;} cases[] = {
+        {"abcdefghij", "abcdefghijk"},
+        {"short", "longer"},
+        {"x", "y"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 100);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 100);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test9_s21_strncmp_empty_strings) {
-    size_t n = 1;
-    s21_size_t s21_n = 1;
-    const char a[] = "";
-    const char b[] = "";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"", ""}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 1);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 1);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
 START_TEST(test10_s21_strncmp_partial_compare) {
-    size_t n = 3;
-    s21_size_t s21_n = 3;
-    const char a[] = "abcdef";
-    const char b[] = "abcxyz";
-    int res = strncmp(a, b, n);
-    int s21_res = s21_strncmp(a, b, s21_n);
-    ck_assert((res == 0 && s21_res == 0) || (res < 0 && s21_res < 0) || (res > 0 && s21_res > 0));
+    struct { const char *a; const char *b; } cases[] = {
+        {"abcdef", "abcxyz"},
+        {"123456", "123abc"},
+        {"qwerty", "qweasd"}
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        int res = strncmp(cases[i].a, cases[i].b, 3);
+        int s21_res = s21_strncmp(cases[i].a, cases[i].b, 3);
+        ck_assert((res < 0 && s21_res < 0) || (res > 0 && s21_res > 0) || (res == 0 && s21_res == 0));
+    }
 }
 END_TEST
 
@@ -116,8 +144,8 @@ Suite *s21_strncmp_suite(void) {
     Suite *s = suite_create("s21_strncmp");
     TCase *tc = tcase_create("s21_strncmp_core");
     tcase_add_test(tc, test1_s21_strncmp_equal_strings);
-    tcase_add_test(tc, test2_s21_strncmp_different_first_char);
-    tcase_add_test(tc, test3_s21_strncmp_last_char_diff);
+    tcase_add_test(tc, test2_s21_strncmp_different_last_char);
+    tcase_add_test(tc, test3_s21_strncmp_different_first_char);
     tcase_add_test(tc, test4_s21_strncmp_embedded_null);
     tcase_add_test(tc, test5_s21_strncmp_zero_length);
     tcase_add_test(tc, test6_s21_strncmp_same_prefix_longer_string);
