@@ -54,7 +54,6 @@ test: $(TEST_OBJS)
 	$(CC) $(CFLAGS_TESTS) $(TEST_OBJS) $(LDFLAGS_TESTS) -o $(TEST_EXEC)
 	rm -f ../unit_test/*.o
 	./$(TEST_EXEC)
-	rm -f $(TEST_EXEC)
 
 ../unit_test/%.o: ../unit_test/%.c
 	$(CC) $(CFLAGS_TESTS) -c $< -o $@
@@ -68,7 +67,11 @@ gcov_report: $(LIB_NAME)
 	
 
 open_report:
-	google-chrome ./report/index.html 2>/dev/null &
+	google-chrome ./report/index.html
+
+valgrind:
+	valgrind --tool=memcheck --leak-check=yes --log-file=valgrind_log.txt ./$(TEST_EXEC)
+	# grep "ERROR SUMMARY" valgrind_log.txt | grep -v "0 errors"
 
 cppcheck:
 	cppcheck --enable=all --suppress=missingIncludeSystem $(SRC) $(TEST_SRC)
@@ -77,8 +80,12 @@ clang:
 	cp ../materials/linters/.clang-format ./
 	clang-format -i $(SRC) $(TEST_SRC)
 
+style-check:
+	cp ../materials/linters/.clang-format ./
+	clang-format -n $(SRC) $(TEST_SRC)
+
 clean:
-	rm -rf *.o *.a *.gc* *.info *.gcda *.gcno $(TEST_EXEC) ../unit_test/*.o
+	rm -rf *.o *.a *.gc* *.info *.gcda *.gcno $(TEST_EXEC) ../unit_test/*.o valgrind_log.txt
 	rm -rf report/
 
 rebuild: clean all
